@@ -33,8 +33,8 @@
 				</a>
 			</div>
 			<div class="right">
-				<a class="iconbounce login" href="${pageContext.request.contextPath}/JSP/suplogin.jsp" title="超级管理员登录"><i class="icon icon-login"></i>超级管理员登录</a>
-				<a class="iconbounce" href="${pageContext.request.contextPath}/JSP/service.jsp" title="联系客服"><i class="icon icon-service"></i>联系客服</a>
+				<a class="iconbounce login" href="${pageContext.request.contextPath}/admin/into" title="超级管理员登录"><i class="icon icon-login"></i>超级管理员登录</a>
+				<a class="iconbounce" href="${pageContext.request.contextPath}/common/service" title="联系客服"><i class="icon icon-service"></i>联系客服</a>
 			</div>
 		</div>
 	</div>
@@ -56,11 +56,11 @@
 					<div class="box-bar">
 						<ul class="clearfix">
 							<li class="active"><a href="javascript:;">登录</a></li>
-							<li><a href="${pageContext.request.contextPath}/Question_Servlet">注册</a></li>
+							<li><a href="${pageContext.request.contextPath}/login/register">注册</a></li>
 						</ul>
 					</div>
 					
-						<form action="${pageContext.request.contextPath}/User_Servlet" method="post">
+						<form action="${pageContext.request.contextPath}/login/user_login" method="post">
 						<ul class="loginfrm-body">
 							<li>&nbsp;</li>
 							<li>&nbsp;</li>

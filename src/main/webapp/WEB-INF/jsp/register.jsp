@@ -62,7 +62,7 @@
 				<div class="login-box">
 					<div class="box-bar">
 						<ul class="clearfix">
-							<li><a href="${pageContext.request.contextPath}/JSP/login.jsp" >登录</a></li>
+							<li><a href="${pageContext.request.contextPath}/login/index" >登录</a></li>
 							<li class="active"><a href="javascript:;">注册</a></li>
 						</ul>
 					</div>

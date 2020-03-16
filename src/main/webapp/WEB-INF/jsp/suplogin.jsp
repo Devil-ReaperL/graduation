@@ -11,7 +11,7 @@
 <fieldset>
 	<legend>用户登录</legend>
     <div id="box1">
-        <form action="${pageContext.request.contextPath}/User_Servlet" method="post">
+        <form action="${pageContext.request.contextPath}/admin/login" method="post">
             <table id="table">
                 <tr>
                     <th> 请输入管理员账号：</th>

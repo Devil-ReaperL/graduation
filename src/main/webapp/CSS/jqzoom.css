@@ -1,0 +1,41 @@
+.jqzoom{
+border:1px solid #CCCCCC;
+float:left;
+position:relative;
+padding:0px;
+cursor:crosshair;
+}
+
+.jqzoom{
+float:left;
+}
+
+
+div.zoomdiv {
+z-index                 : 100;
+position                : absolute;
+top:0px;
+left:0px;
+width                   : 200px;
+height                  : 200px;
+background: #ffffff;
+border:1px solid #CCCCCC;
+display:none;
+text-align: center;
+overflow: hidden;
+
+
+}
+
+div.jqZoomPup {
+z-index                 : 10;
+visibility              : hidden;
+position                : absolute;
+top:0px;
+left:0px;
+/*width                   : 50px;
+
+height                  : 50px;
+*/
+background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAWSURBVBhXY7DNO/cfCBgYQMT///8ZAGbBC3BCcQsjAAAAAElFTkSuQmCC) repeat scroll 0 0 transparent;
+}

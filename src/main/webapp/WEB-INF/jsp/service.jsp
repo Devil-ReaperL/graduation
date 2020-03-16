@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.lazyload.min.js"></script>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.showDialog.js"></script>
-	<link href="//www.haohua.com/theme/haohua.com/default/static/css/showDialog.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/CSS/showDialog.css" rel="stylesheet" type="text/css" />
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/app.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/common.js"></script>
@@ -26,7 +26,7 @@
 <div class="topper">
 		<div class="wrap">
 			<div class="left">
-				<a onclick="app.tools.addFavorite();" href="javascript:;" title="收藏BTS网 (haohua.com)">收藏BTS网 (haohua.com)</a>
+				<a onclick="app.tools.addFavorite();" href="javascript:;" title="收藏BTS网 ">收藏BTS网 (haohua.com)</a>
 				<a href="javascript:;">
 					关注微信
 					<div class="topperpop">
@@ -47,7 +47,7 @@
 					<i class="icon icon-my"></i>
 					我的好花
 				</a> 
-				<a class="iconbounce" href="service.jsp" title="联系客服">
+				<a class="iconbounce" href="common/service" title="联系客服">
 					<i class="icon icon-service"></i>
 					联系客服
 				</a> 
@@ -66,13 +66,13 @@
 				
 				
 		  </div>
-</div>
+		</div>
 	</div>
 
 	
 	
-<script type="text/javascript" src="//www.haohua.com/theme/haohua.com/default/static/js/jquery.jqzoom.js"></script>
-<link href="//www.haohua.com/theme/haohua.com/default/static/css/jqzoom.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.jqzoom.js"></script>
+<link href="${pageContext.request.contextPath}/CSS/jqzoom.css" rel="stylesheet" type="text/css" />
 	
 		
 <table width="1397" height="444" border="0" align="center">
@@ -169,7 +169,7 @@
 			</div>
 			<div class="flianxi">
 				<h5>联系我们</h5>
-				<p class="hotline">全国订购热线:<span>400-888-9411</span></p>
+				<p class="hotline">全国订购热线:<span>400-000-0000</span></p>
 				<div class="cservice"><a href="javascript:;" onclick="openChat();"><img src="//www.haohua.com/theme/haohua.com/default/static/img/cservice.png" width="114" height="33" /></a></div>
 				<p class="worktime">客服工作时间：8:30-21:00</p><br>
 				<p class="worktime">售后服务电话：13378216662</p>
@@ -184,7 +184,7 @@
 		<!---->
 		<script type="text/javascript" src="//www.haohua.com/theme/haohua.com/default/static/js/mobile.js"></script>
 		<div class="wrap fcopyright">
-			<p class="note">网站声明：本站由软工七班最帅6人组 共同完成 </p>
+			<p class="note">网站声明：毕设网站 </p>
 			<ul class="clearfix">
 				<li class="img1"><a href="#" target="_blank" rel="nofollow">实名认证</a></li>
 				<li class="img2"><a href="#" target="_blank" rel="nofollow">官方验证</a></li>
