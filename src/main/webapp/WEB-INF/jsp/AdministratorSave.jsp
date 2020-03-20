@@ -2,16 +2,27 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>添加商品</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style2.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/JS/1.js"></script>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>添加商品</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="${pageContext.request.contextPath}/CSS/style2.css" rel="stylesheet" type="text/css"  />
+		<link href="${pageContext.request.contextPath}/CSS/summernote.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/CSS/bootstrap.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/CSS/default.css" rel="stylesheet" type="text/css" >
+        <link href="${pageContext.request.contextPath}/CSS/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+      	<link href="${pageContext.request.contextPath}/CSS/jquery-ui.css" rel="stylesheet">
+      	
+		<script src="${pageContext.request.contextPath}/JS/jquery-2.1.4.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/JS/1.js"  type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/JS/jquery.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/JS/fileinput.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
+    	<script src="${pageContext.request.contextPath}/JS/summernote.js"></script>
+    	<script src="${pageContext.request.contextPath}/JS/jquery.spinner.js"></script>
+	</head>
 <body>
 	<form action="${pageContext.request.contextPath}/AdministratorSave_Servlet" method="post" >
 		<table width="600px" height="600px" border="1" align="center">

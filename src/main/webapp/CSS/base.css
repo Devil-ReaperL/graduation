@@ -5718,3 +5718,36 @@ div.vjs-poster{
 	font-weight: normal !important;
 	color: #fff !important;
 }
+.addlable
+{
+	    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.42857143;
+    color: #333333;
+        display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.Symbolstyle{
+	color: #333;
+    text-decoration: none;
+    width: 39px;
+    height: 39px;
+    line-height: 35px;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    cursor: pointer;
+    background-color: #e1e1e1;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: 19px/1.431 'Microsoft YaHei', Helvetica, sans-serif;
+    border: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+.txtstyle{
+	font-size: 22px;
+}
