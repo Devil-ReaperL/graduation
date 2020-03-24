@@ -30,7 +30,7 @@ public class Test {
 	public String  testfile(@Valid Product product)
 	{
 		System.out.println(product.toString());
-		productService.addproduct(product.getFiles());
+		//productService.addproduct(product.getFiles());
 		return "test";
 	}
 }

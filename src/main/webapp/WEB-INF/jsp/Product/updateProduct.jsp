@@ -26,13 +26,13 @@
     		<div class="container kv-main" style="width: 52% ">
     		<div class="form-group " style="width: 70%">
 				<label for="name" class="addlable form-inline">商品名称：</label>
-				<input name="name" type="text" class=" form-control " id="name" 
+				<input value="${product.name}" name="name" type="text" class=" form-control " id="name" 
 			  			 placeholder="请输入商品名称" style="font-size: 20px;">
 			</div>
 			
 			<div class="form-group" style="width: 70%">
 				<label for="ID" class="addlable">商品编号：</label>
-				<input name="id" type="text" class="form-control" id="ID" 
+				<input value="${product.id}" name="id" type="text" class="form-control" id="ID" 
 			  			 placeholder="请输入商品编号" style="font-size: 20px;">
 			</div>
 			
@@ -77,7 +77,7 @@
             
             <div style="width: 50%;margin:20px auto" >
             	<label for="summernote" class="addlable">详细信息：</label>
-   			 	<textarea id="summernote" name="summernote"></textarea>
+   			 	<textarea id="summernote" name="summernote" ></textarea>
    			 	<button   id="BTN" class="btn btn-danger btn-lg" style="float: right;width: 120px;font-size: 20px;height: auto;">提交</button>
     		</div>  	
     		
@@ -88,6 +88,8 @@
 		
 </body>
 <script>
+alert('${product.summernote}')
+
 	$('.spinner').spinner({ 
 	    max:999, 
 	    min:0, 
@@ -135,6 +137,7 @@
     
 	</script>
 	<script type="text/javascript">
+	$('#summernote').summernote('code','${product.summernote}');
 	function successfun(data, status) {
 	    //data是提交成功后的返回数据，status是提交结果 比如success
 	    //返回数据的类型是通过options对象里面的dataType定义的，比如json、xml，默认是html

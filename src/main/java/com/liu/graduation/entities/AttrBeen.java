@@ -1,49 +1,27 @@
 package com.liu.graduation.entities;
 
 public class AttrBeen {
-    private String attri;
-    private String ename;
+    private String id;
+    private String name;
     private String path;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 
-    public String getAttri() {
-        return attri;
-    }
-
-    public void setAttri(String attri) {
-        this.attri = attri;
-    }
-
-    public String getEname() {
-        return ename;
-    }
-
-    public void setEname(String ename) {
-        this.ename = ename;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public AttrBeen(String attri, String ename, String path) {
-        this.attri = attri;
-        this.ename = ename;
-        this.path = path;
-    }
-
-    public AttrBeen() {
-    }
-
-    @Override
-    public String toString() {
-        return "Attr{" +
-                "attri='" + attri + '\'' +
-                ", ename='" + ename + '\'' +
-                ", path='" + path + '\'' +
-                '}';
-    }
+    
 }

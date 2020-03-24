@@ -14,6 +14,7 @@ public class AdminServiceimpl implements AdminService{
 	private AdminDao adminDao;
 
 	
+	
 	public int queryAdmin(String name, String password) {
 		
 		return adminDao.queryAdmin(name, password);
