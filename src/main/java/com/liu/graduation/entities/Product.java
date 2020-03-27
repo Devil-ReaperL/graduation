@@ -117,6 +117,7 @@ public class Product {
 	}
 	public void setSrc(String src) {
 		this.src = src;
+		this.setSrcs(src);
 	}
 	public void setSrc(String src,String s) {
 		this.src = this.src+src+s;
@@ -124,6 +125,7 @@ public class Product {
 	public List<String> getSrcs() {
 		return srcs;
 	}
+	
 	public void setSrcs(String srcs) {
 		this.srcs = new ArrayList<String>();
 		String[] s=srcs.split(";");

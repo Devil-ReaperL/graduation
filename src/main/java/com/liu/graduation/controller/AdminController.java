@@ -130,6 +130,7 @@ public class AdminController {
 		product.setAddtime(null);
 		productService.findProductList(product,model, 1);
 		model.addAttribute("curPage","1");
+		model.addAttribute("key","");
 		return "Product/productlist";
 	}
 	

@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -183,5 +184,55 @@ public class ProductServiceimpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDao.selectProductById(id);
 	}
+	@Override
+	public int deleteImg(String id, String src) {
+		// TODO Auto-generated method stub
+		return productDao.deleteImg(id, src);
+	}
+	@Override
+	public int updateProduct(Product product) {
+		if (product.getFiles()!=null) {
+			product.setSrc("");
+			String path = findServerPath();
+			String f=UUID.randomUUID().toString()+"\\";
+			try {
+				if( product.getFiles().length>0)
+				for (MultipartFile multipartFile : product.getFiles()) {			
+					String s=saveImgfile(multipartFile, path+f);
+					if(s!="")
+					{
+						product.setSrc(f, s+";");
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return 0;
+			}
+			
+		}
+		return productDao.updateProduct(product);
+	}
+	@Override
+	public Map<String, Object> findProductList(String find, int currpage) {
+		Map<String, Object>  map=new HashMap<String, Object>();
+		int recordCount = productDao.countProductBykey(find);
+        int disp = Integer.parseInt(getPageConf().getProperty("disp")) ;
+        int offset = (currpage - 1) * disp;
+        
+		List<Product> products=productDao.queryProductBykey(find,new RowBounds(offset, disp));
+		List<Pagination> pages = PaginationUtils.pagination(recordCount, currpage, disp);
+		for (Product p : products) {
+			p.setSrcs(p.getSrc());
+		}
+		
+		map.put("curPage", currpage);
+		map.put("products", products);
+		map.put("pages", pages);
+		map.put("key", find);
+		map.put("pageCnt", recordCount%disp<1?recordCount/disp:recordCount/disp+1);
+		return map;
+	}
+	
 
 }

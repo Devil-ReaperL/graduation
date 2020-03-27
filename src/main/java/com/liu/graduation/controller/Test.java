@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.liu.graduation.entities.Product;
-import com.liu.graduation.entities.ProductTest;
 import com.liu.graduation.service.ProductService;
 
 @RequestMapping("/uploadImg")

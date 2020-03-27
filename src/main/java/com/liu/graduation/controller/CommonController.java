@@ -1,7 +1,13 @@
 package com.liu.graduation.controller;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.liu.graduation.entities.Product;
 
 @RequestMapping("/common")
 @Controller
@@ -11,5 +17,13 @@ public class CommonController {
 	public String serviceInto()
 	{
 		return "service";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/delete")
+	public String delete()
+	{
+	
+				return "true";
 	}
 }

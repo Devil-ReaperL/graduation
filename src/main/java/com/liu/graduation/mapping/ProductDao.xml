@@ -109,4 +109,65 @@
 		SET endtime=#{endtime,jdbcType=TIMESTAMP}
 		WHERE id= #{id,jdbcType=VARCHAR}
     </update>
+    <update id="deleteImg" parameterType="com.liu.graduation.entities.Product" >
+    	UPDATE product
+		SET src=REPLACE(src,#{src,jdbcType=LONGVARCHAR},"")
+		WHERE id= #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateProduct" parameterType="com.liu.graduation.entities.Product" >
+    	UPDATE product
+		SET 
+		<if test="name != null" >
+        name=#{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price=#{price,jdbcType=FLOAT},
+      </if>
+       <if test="stock != null" >
+      	stock=#{stock,jdbcType=INTEGER},
+      </if>
+      <if test="attr != null" >
+      	attr=#{attr,jdbcType=INTEGER},
+      </if>
+      <if test="src != null" >
+      	src=CONCAT(src, #{src,jdbcType=LONGVARCHAR}),
+      </if>
+      <if test="summernote != null" >
+      	summernote=#{summernote,jdbcType=LONGVARCHAR},
+      </if>
+     <if test="addtime != null" >
+      addtime =#{addtime,jdbcType=TIMESTAMP}
+      </if>
+		WHERE id=#{id,jdbcType=VARCHAR}
+    </update>
+     <select id="countProductBykey"
+		resultType="int"
+		 >
+	    select 
+	      count(p.id) 
+	    from
+	      product p join attr a ON p.attr=a.id
+	    where p.endtime is null  
+	    <if test="key != null" >
+      	and ( p.id like CONCAT('%', #{key},'%') 
+	    or a.name like CONCAT('%', #{key},'%') 
+	    or p.name like CONCAT('%', #{key},'%')
+	    or p.addtime like CONCAT('%', #{key},'%')
+	    or p.summernote like CONCAT('%', #{key},'%'))
+      	</if> 
+      	order by p.addtime desc       
+	 </select>
+	 <select id="queryProductBykey" resultMap="BaseResultMap" >
+        SELECT p.id,p.name,p.price,p.src,p.stock,a.name AS attr,p.summernote,p.addtime,p.endtime 
+		from product p join attr a ON p.attr=a.id
+		where p.endtime is null  
+	    <if test="key != null" >
+      	and ( p.id like CONCAT('%', #{key},'%') 
+	    or a.name like CONCAT('%', #{key},'%') 
+	    or p.name like CONCAT('%', #{key},'%')
+	    or p.addtime like CONCAT('%', #{key},'%')
+	    or p.summernote like CONCAT('%', #{key},'%') )
+      	</if>
+ 		 order by p.addtime desc
+	</select>
 </mapper>

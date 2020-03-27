@@ -32,7 +32,7 @@
 			
 			<div class="form-group" style="width: 70%">
 				<label for="ID" class="addlable">商品编号：</label>
-				<input value="${product.id}" name="id" type="text" class="form-control" id="ID" 
+				<input readonly="readonly" value="${product.id}" name="id" type="text" class="form-control" id="ID" 
 			  			 placeholder="请输入商品编号" style="font-size: 20px;">
 			</div>
 			
@@ -41,8 +41,19 @@
 			<div class="form-group" style="width: 23%">
 				<label for="attr" class="addlable form-inline">商品类别：</label>
 				<select id="attr" name="attr" class="form-control" style="font-size: 20px;">
-				<c:forEach items="${attrs}" var="attr">
-					<option value="${attr.id}">${attr.name}</option>
+				
+				<c:forEach items="${attrs}" var="attr">				
+					<c:choose>
+					
+					   <c:when test="${attr.id == product.attr}">
+					   <option selected="selected" value="${attr.id}">${attr.name}</option>
+					   </c:when>
+				   
+					   <c:otherwise>
+							<option value="${attr.id}">${attr.name}</option>
+					   </c:otherwise>	
+					   				  
+					</c:choose>
 				</c:forEach>
 				</select>				
 			</div>
@@ -78,22 +89,53 @@
             <div style="width: 50%;margin:20px auto" >
             	<label for="summernote" class="addlable">详细信息：</label>
    			 	<textarea id="summernote" name="summernote" ></textarea>
+   			 	
    			 	<button   id="BTN" class="btn btn-danger btn-lg" style="float: right;width: 120px;font-size: 20px;height: auto;">提交</button>
+   		 	   	<button type="button"   id="BTN1" class="btn btn-success btn-lg" style="float: right;width: 120px;font-size: 20px;height: auto;margin-right: 20px">取消</button>
+    		
     		</div>  	
     		
            </form>
-           <br> <br>
+           <br> <br><!-- 
 		<jsp:include page="/WEB-INF/jsp/foot.jsp" flush="true" ></jsp:include>
+	 -->
 	
+		<c:forEach items="${product.srcs}" var="src">
+			<label hidden="true" class="srcs">${src}</label>
+		</c:forEach>
 		
 </body>
 <script>
-alert('${product.summernote}')
+	$("#BTN1").click(function () {
+	if(confirm("是否确认取消修改"))
+		window.location.href="${pageContext.request.contextPath}/admin/search";
+	})
+	var array = new Array();
+	
+	$(".srcs").each(function () {
+		 array.push("\\image\\"+$(this).text());
+	})
+
+	
+	var initialPreview = [];
+	var initialPreviewConfig = [];
+
+function initFile() {
+    for (var i = 0; i < array.length; i++) {
+        initialPreview.push(array[i]);
+        var config = {caption: array[i], filename: array[i],url:"${pageContext.request.contextPath}/product/deleteImg/${product.id}",key: array[i]}
+        initialPreviewConfig.push(config);
+    }
+}
+initFile();
+
+
+	
 
 	$('.spinner').spinner({ 
 	    max:999, 
 	    min:0, 
-	    step:1 
+	    step:1,
 	});
 
 	$(document).ready(function() {
@@ -104,6 +146,8 @@ alert('${product.summernote}')
              lang: 'zh-CN',
             
          });
+        $('#spinner1').val(${product.price});
+        $('#spinner').val(${product.stock});
 	});
     
     $("#uploadImg").fileinput({
@@ -113,10 +157,16 @@ alert('${product.summernote}')
         uploadAsync: true, 
         showCancel:false,
         showUpload:false,
+        showPreview : true,
+        showRemove:true,
         minFileCount: 1,
         browseOnZoneClick: true,
         maxFileSize: 1024*10242*2,
         maxFileCount: 5,
+        initialPreview: initialPreview,
+        initialPreviewAsData: true,
+        initialPreviewConfig: initialPreviewConfig,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
         layoutTemplates :{
             actions: '<div class="file-actions">\n' +
         '    <div class="file-footer-buttons">\n' +
@@ -132,7 +182,18 @@ alert('${product.summernote}')
             return filename.replace('(', '_').replace(']', '_');
         }
     
-	});
+	}).on('filepredelete', function(event, key, jqXHR, data) {  
+		var files1=$(".file-preview-frame").length
+	     
+	    if(files1<3){
+				alert("必须保留至少一张图片"+"请选择上传文件！");
+				return true;
+			}
+        if(!confirm("确定删除原文件？删除后不可恢复")){  
+            return false;  
+        }  
+});  
+
 	
     
 	</script>
@@ -145,16 +206,32 @@ alert('${product.summernote}')
 	    //这里data.success是因为我后天返回的json数据的一个属性 String jsonText = "{'success':'提交成功'}";
 	    if(data==true)
 	    	{
-	    	alert('商品添加成功')
+	    	alert('商品信息修改成功')
 	    	window.location.href="${pageContext.request.contextPath}/admin/search";
 	    	}
 	    	
 	   	else
 	   		alert("添加商品的商品编号已经存在")
 	}
+
 	function modifySubmitData() {
 		$('#spinner1').val(parseFloat($('#spinner1').val()))
+		var fileInput = $('#uploadImg').get(0).files[0];
+		var files1=$(".file-preview-frame").length
+     
+	    if(files1<1){
+				alert("请选择上传文件！");
+				return false;
+			}
+    	
+		if(typeof(fileInput) == "undefined")
+	    {
+	 		$("[name='files']").remove()
+	 	
+	    }
+		 
 	}
+	
 	function beforeCheck(formData, form, options) {
 		
 	    //利用form校验
@@ -165,10 +242,11 @@ alert('${product.summernote}')
 	    var name = formDom["name"].value;//这里寻找name为name或者id为name的元素的值
 	    var id = formDom["id"].value;
 	    var price = formDom["price"].value;
-	    var stock = formDom["stock"].value;    
-	    var fileInput = $('#uploadImg').get(0).files[0];
+	    var stock = formDom["stock"].value;
+	    
+	    
 	    var summernote = $('#summernote').summernote('code');	
-
+	    
 	    
 	    if (!name) {
 	        alert("商品名称不能为空")
@@ -187,10 +265,7 @@ alert('${product.summernote}')
 	        return false;
 	    }
 	    
-	    if(!fileInput){
-			alert("请选择上传文件！");
-			return false;
-		}
+	    
 		if (summernote<10) {
       	  	alert("商品详细信息字符需大于10");
     	    return false;
@@ -202,7 +277,7 @@ alert('${product.summernote}')
 
 	} 
 	var options = {
-	    url: "${pageContext.request.contextPath}/product/addproduct", //提交地址：默认是form的action,如果申明,则会覆盖
+	    url: "${pageContext.request.contextPath}/product/updateProduct/", //提交地址：默认是form的action,如果申明,则会覆盖
 	    type: "post",   //默认是form的method（get or post），如果申明，则会覆盖
 	    beforeSubmit: beforeCheck, //提交前的回调函数
 	    success: successfun,  //提交成功后的回调函数
@@ -215,8 +290,6 @@ alert('${product.summernote}')
 	};
 	$('#addproduct').ajaxForm(options)
 	
-	
-
 	</script>
 
 </html>

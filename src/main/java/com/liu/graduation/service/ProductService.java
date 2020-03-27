@@ -1,6 +1,7 @@
 package com.liu.graduation.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,4 +16,8 @@ public interface ProductService {
 	public String findProductList(Product product,Model model,int currpage);
 	public int deleteProduct(Product product);
 	public Product updateProduct(String id);
+	public int deleteImg(String id,String src);
+	public int updateProduct(Product product);
+	public Map<String,Object> findProductList(String find,int currpage);
+	
 }

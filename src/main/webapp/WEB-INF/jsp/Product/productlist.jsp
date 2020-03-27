@@ -19,7 +19,16 @@
 
 	<jsp:include page="/WEB-INF/jsp/Product/headadmin.jsp" flush="true" ></jsp:include>
 	
-	<div>from</div>
+	<form id="addproduct"  class="form-inline" role="form"  method="post">
+    		<div class="container kv-main" style="width:100%; ">
+    		<div class="form-group " style="width: 100%;text-align: center;">
+				<br>
+				<input value="${product.name}" name="find" type="text" class=" form-control " id="find" 
+			  			 placeholder="请输入搜索内容" style="font-size: 20px;">
+			  			<button  class="btn btn-default btn-sm" style="font-size: 20px;height: 40px">
+				          <span class="glyphicon glyphicon-search"></span>
+				        </button>
+			</div></div></form>
 	
 	<hr>
 	
@@ -37,7 +46,7 @@
 					<th>操作</th>
 				</tr>				
 			</thead>
-			<tbody>
+			<tbody id="tbody">
 			<c:if test="${not empty products}">
 				<c:forEach items="${products}" var="product">
 					<tr >
@@ -73,12 +82,12 @@
 		<!--  pagination -->
 		<div class="text-center ">
 			<c:if test="${not empty pages}">
-				<div class="pagination pagination-centered">
+				<div class="pagination pagination-centered" id="page">
 					<ul>
 						
 						<c:forEach var="page" items="${pages}">
 							<li class="${page.cssClass}"><a
-								href="${pageContext.request.contextPath}/admin/search/${page.index}">${page.content}</a></li>
+							onclick="PageAjax('${page.index}','${key}')"	>${page.content}</a></li>
 						</c:forEach>
 						<!-- ページ番号入力ボックス -->
 						<li>
@@ -91,7 +100,7 @@
 									if(value > ${pageCnt})value=${pageCnt};" style="width: 60px ; text-align: center;"
 									/> 
 									/ <c:out value="${pageCnt}" />
-								<a id="jumpToPage" href="${pageContext.request.contextPath}/admin/search/" class=""> JUMP
+								<a id="jumpToPage" onclick="PageAjax('jump','${key}')" class=""> JUMP
 								</a>
 							</form>
 						</li>
@@ -125,5 +134,99 @@ function deleteProdect(id,name) {
 }
 
 </script>
+<script type="text/javascript">
+var options = {
+	    url: "${pageContext.request.contextPath}/product/findProduct/1", //提交地址：默认是form的action,如果申明,则会覆盖
+	    type: "post",   //默认是form的method（get or post），如果申明，则会覆盖
+	    success: successfun,  //提交成功后的回调函数
+	    dataType: "json", //html(默认), xml, script, json...接受服务端返回的类型
 
+	    timeout: 6000     //限制请求的时间，当请求大于3秒后，跳出请求
+	};
+	$('#addproduct').ajaxForm(options)
+function successfun(data, status) {
+	    //data是提交成功后的返回数据，status是提交结果 比如success
+	    //返回数据的类型是通过options对象里面的dataType定义的，比如json、xml，默认是html
+	
+	    //这里data.success是因为我后天返回的json数据的一个属性 String jsonText = "{'success':'提交成功'}";
+	    if(status)
+	    	{
+	    	successinfo(data)
+	    	}
+
+}
+function successinfo(data) {
+	if(data)
+		{
+		console.log(data)
+   	 $("#tbody").empty();
+   	var html=""
+   	for (var k in data.products) {
+   		
+   		html+="<tr >"+
+			"<td >"+data.products[k].id+"</td>"+
+			"<td >"+
+				'<img style="width: 200px;height: 200px" alt="'+data.products[k].name+'" src="/image/'+data.products[k].srcs[0]+'">'	+				
+			"</td>"+
+			"<td> "+data.products[k].name+'</td>'+
+			"<td> "+data.products[k].attr+'</td>'+
+			"<td> "+data.products[k].price+'</td>'+
+			"<td> "+data.products[k].stock+'</td>'+
+			"<td>"+data.products[k].addtime+'</td>'+
+			"<td>"+
+				'<a href="${pageContext.request.contextPath}/product/update/'+data.products[k].id+'">修改</a><br><br>'+
+				'<a onclick="deleteProdect('+data.products[k].id+','+data.products[k].name+')">删除</a>'+
+			"</td>"+
+		"</tr>"
+		}
+   	
+   	
+   	 $("#tbody").html(html)
+   	var page=""
+   	 $("#page").empty();
+   	page+="<ul>"
+		for ( var p in data.pages) {
+			page+='<li class="'+data.pages[p].cssClass+'">'+
+			'<a onclick="PageAjax('+data.pages[p].index+",'"+data.key+"'"+')" >'+data.pages[p].content+'</a></li>'
+		}
+   	page+=
+		'<li><form cssClass="form-inline" style="float:left;margin-left: 20px;" method="post">'+
+					'Page:'+
+					'<input '+
+					'id="targetPage" name="targetPage" class="input-mini"'+
+					'type="text"  value="'+data.curPage+'" maxlength="3" oninput = "value=value.replace(/\D|^0/g,'+"''"+');'+
+					'if(value > '+data.pageCnt+')value='+data.pageCnt+';"  style="width: 60px ; text-align: center;" /> '+
+					'/ '+data.pageCnt+
+				'<a id="jumpToPage" onclick="PageAjax('+"'jump','"+data.key+"'"+')"  class=""> JUMP'+
+				'</a>'+
+			'</form>'+
+		'</li>'+
+	'</ul>'
+	console.log(page)
+		$("#page").html(page)
+		}
+}
+
+function PageAjax(url,key) {
+	if(url=="jump")
+	url=$("#targetPage").val()
+	console.log(url)
+	console.log("1"+key)
+	$.ajax({
+		 type: "GET",
+        url: "${pageContext.request.contextPath}/product/findProduct/"+url,
+        data:{"find":key},
+        success: function(data){
+       		successinfo(data)
+       		$('html,body').animate({scrollTop: '0px'}, 800);
+        },
+        error: function(XMLHttpRequest,textStatus){
+       	 alert("请求失败")
+ 
+        }
+	 })
+	 return false;
+}
+ 
+</script>
 </html>
