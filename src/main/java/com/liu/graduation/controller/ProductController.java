@@ -62,7 +62,7 @@ public class ProductController {
 	{
 		
 			model.addAttribute("attrs", productService.findAttrList());
-			model.addAttribute("product", productService.updateProduct(id));
+			model.addAttribute("product", productService.findProductByid(id));
 			
 			return "Product/updateProduct";
 	}
@@ -105,5 +105,11 @@ public class ProductController {
 		}
 	
 		return productService.findProductList(key, page);
+	}
+	@RequestMapping("/info/{id}")
+	public String Productinfo(@PathVariable("id") String id,Model model)
+	{
+		productService.productinfo(id, model);
+		return "productinfo";
 	}
 }

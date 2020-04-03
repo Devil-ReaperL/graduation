@@ -34,6 +34,10 @@ function sd_load(sd_width) {
 	if(sd_left < 0) {
 		sd_left = 0;
 	}
+	console.log("1+"+$("#SD_window").height())
+	console.log("$(window).height() "+$(window).height())
+	console.log("$(document).scrollTop()"+$(document).scrollTop())
+	console.log(sd_top+","+sd_left)
 	$("#SD_window").css("top", sd_top);
 	$("#SD_window").css("left", sd_left);
 }
@@ -117,8 +121,12 @@ function showDialog(mode, msg, t, sd_width) {
 		});
 		$(document).mousemove(function(e){
 			if(sd_move){
+				
 				var x = e.pageX - sd_x;
 				var y = e.pageY - sd_y;
+				console.log(x+","+y)
+				console.log(e.pageX +","+e.pageY)
+				console.log(sd_x+","+sd_y)
 				$("#SD_window").css({left:x, top:y});
 			}
 		}).mouseup(function(){

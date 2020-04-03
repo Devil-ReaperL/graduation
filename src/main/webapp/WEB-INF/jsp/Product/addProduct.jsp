@@ -114,7 +114,7 @@
         minFileCount: 1,
         browseOnZoneClick: true,
         maxFileSize: 1024*10242*2,
-        maxFileCount: 5,
+        maxFileCount: 4,
         layoutTemplates :{
             actions: '<div class="file-actions">\n' +
         '    <div class="file-footer-buttons">\n' +

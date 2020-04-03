@@ -170,4 +170,9 @@
       	</if>
  		 order by p.addtime desc
 	</select>
+	<select id="queryProductAll" resultMap="BaseResultMap" >
+        select * from product
+        where endtime is null
+    </select>
+	
 </mapper>

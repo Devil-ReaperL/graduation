@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,7 +181,7 @@ public class ProductServiceimpl implements ProductService{
 		return productDao.deleteProduct( product);
 	}
 	@Override
-	public Product updateProduct(String id) {
+	public Product findProductByid(String id) {
 		// TODO Auto-generated method stub
 		return productDao.selectProductById(id);
 	}
@@ -232,6 +233,31 @@ public class ProductServiceimpl implements ProductService{
 		map.put("key", find);
 		map.put("pageCnt", recordCount%disp<1?recordCount/disp:recordCount/disp+1);
 		return map;
+	}
+	@Override
+	public void home(Model model) {
+		Map<String, List<Product>> map=new HashMap<String, List<Product>>();
+		
+		List<Product> list=productDao.queryProductAll();
+		
+		List<AttrBeen> aList=attrDao.selectList();
+		
+		for (AttrBeen attrBeen : aList) {
+			List<Product> lp=new ArrayList<Product>();
+			for (Product product : list) {
+				if (product.getAttr().equals(attrBeen.getId())) {
+					lp.add(product);
+				}
+			}
+			map.put(attrBeen.getId(), lp);
+		}
+		model.addAttribute("products", map);
+		model.addAttribute("attrs", aList);
+	}
+	@Override
+	public void productinfo(String id, Model model) {
+		
+		model.addAttribute("product", productDao.selectProductById(id));
 	}
 	
 

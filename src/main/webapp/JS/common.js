@@ -22,7 +22,7 @@ $(function(){
 	}
 
 	app.login.ajax = function(){ 
-		showWindow('您尚未登录', '/member/login/index', 500, 300);
+		showWindow('您尚未登录', 'https://www.haohua.com/member/login/index', 500, 300);
 	}
 
 	//加载会员
@@ -230,7 +230,7 @@ $(function(){
 		}
 	});
 
-	//ajax
+	//ajax ok
 	$('a[res=ajax]').click(function(){
 		var _this = this;
 		var method = $(_this).data('method') && $(_this).data('method').toLowerCase() =='post' ? 'post' : 'get';
@@ -250,16 +250,17 @@ $(function(){
 				type	: method,
 				data 	: option,
 				dataType: 'json',
-				error	: function( event, xhr ) {
-					app.tools.info( xhr.responseText );
-				},
-				success: function(result) {
-					if( result.status ){
+				 error: function(XMLHttpRequest,textStatus){
+			       	 alert("请求失败"+textStatus)
+			       	location.reload();
+			        },
+				success: function(data) {
+					if(data){
+						//alert(title+"成功")
 						location.reload();
 					}
-					else{
-						app.tools.info( result.msg );
-					}
+					else
+						alert(title+"失败")
 				}
 			});
 		});
@@ -404,7 +405,7 @@ function formVerify( form ){
 function login( callback ){
 	callback = callback ? callback : function(){location.reload();};
 	app.login.ajaxcall = callback;
-	showWindow('您尚未登录', '/member/login/index', 500, 300);
+	showWindow('您尚未登录', 'https://www.haohua.com/member/login/index', 500, 300);
 }
 
 function  showCartTip( obj ){ 

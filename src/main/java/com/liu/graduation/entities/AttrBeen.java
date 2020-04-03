@@ -4,6 +4,14 @@ public class AttrBeen {
     private String id;
     private String name;
     private String path;
+    private String describe;
+    
+	public String getDescribe() {
+		return describe;
+	}
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
 	public String getId() {
 		return id;
 	}

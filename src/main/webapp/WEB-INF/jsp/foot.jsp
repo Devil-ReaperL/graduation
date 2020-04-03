@@ -82,19 +82,18 @@
 			<div class="flianxi">
 				<h5>联系我们</h5>
 				<p class="hotline">全国订购热线:<span>400-000-0000</span></p>
-				<div class="cservice"><a href="javascript:;" onclick="openChat();"><img src="//www.haohua.com/theme/haohua.com/default/static/img/cservice.png" width="114" height="33" /></a></div>
-				<p class="worktime">客服工作时间：8:30-21:00</p><br>
-				<p class="worktime">售后服务电话：13378216662</p>
+				<div class="cservice"><a href="javascript:;" onclick="openChat();"><img src="${pageContext.request.contextPath}/img/cservice.png" width="114" height="33" /></a></div>
+				<p class="worktime">客服工作时间：0:00-24:00</p><br>
+				<p class="worktime">售后服务电话：11111111111</p>
 			</div>
 			<div class="fqrcode">
 				<p class="note">回复“礼物”有惊喜！" 活动多多，在BTS遇见幸福</p>
-				<p class="img"><img src="//www.haohua.com/theme/haohua.com/default/static/img/qrcode.png" width="128" height="130" /></p>
+				<p class="img"><img src="${pageContext.request.contextPath}/img/wx.jpg" width="128" height="130" /></p>
 				<p class="gzh">公众号</p>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<!---->
-		<script type="text/javascript" src="//www.haohua.com/theme/haohua.com/default/static/js/mobile.js"></script>
 		<div class="wrap fcopyright">
 			<p class="note">网站声明：毕设网站 </p>
 			<ul class="clearfix">
@@ -104,6 +103,74 @@
 			</ul>
 		</div>
 	</div>
-	
+	<div class="rside" >
+	<div class="cservice rotate">
+		<a href="javascript:;" onclick="openChat();" title="好花顾问" >
+			<i class="icon-rside icon-cservice"></i>
+			<span>好花顾问</span>
+		</a>
+	</div>
+
+	<ul>
+		<li class="rside-btn rotate">
+			
+<a href="#top" class="back-to-top"> Back to top </a>
+		</li>
+		<li class="rside-btn rotate">
+			<a href="javascript:;" onclick="openChat();" title="生日送花">
+				<i class="icon-rside icon-birth"></i>
+				<span>生日送花</span>
+			</a>
+		</li>
+		<li class="rside-btn rotate">
+			<a href="javascript:;" onclick="openChat();" title="爱情鲜花">
+				<i class="icon-rside icon-love"></i>
+				<span>爱情鲜花</span>
+			</a>
+		</li>
+		<li class="rside-btn rotate">
+			<a href="javascript:;" onclick="openChat();" title="商务定制">
+				<i class="icon-rside icon-business"></i>
+				<span>商务定制</span>
+			</a>
+		</li>
+		<li class="rside-qrcode">
+			<div class="fqrcode tc">
+				<p class="gzh">关注我们</p>
+				<p class="gzh">领优惠券</p>
+			</div>
+			<div class="bqrcode">
+				<img src="//www.haohua.com/theme/haohua.com/default/static/img/qrcode.png" width="74" height="74">
+			</div>
+		</li>
+	</ul>
+
+	<div class="rside-cart iconbounce cart">
+		<a href="${pageContext.request.contextPath}/user/intocart/" title="购物车">
+			<i class="icon-rside icon-cart2 icon"></i>
+			<span>0</span>
+		</a>
+		<p>购物车</p>
+	</div>
+</div>
 </body>
+<script type="text/javascript">
+function  requestParam(val) {
+            var reg = new RegExp("(^|&)" + val + "=([^&]*)(&|$)");
+            var result = window.location.search.substr(1).match(reg);
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+	
+$(document).ready(function() {
+	var id=requestParam('message');
+
+	if(id !=null){
+		
+		alert(id)
+		location.reload();
+	}
+		
+});
+
+</script>
 </html>

@@ -162,7 +162,7 @@ initFile();
         minFileCount: 1,
         browseOnZoneClick: true,
         maxFileSize: 1024*10242*2,
-        maxFileCount: 5,
+        maxFileCount: 4,
         initialPreview: initialPreview,
         initialPreviewAsData: true,
         initialPreviewConfig: initialPreviewConfig,

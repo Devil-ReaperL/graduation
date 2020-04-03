@@ -3,7 +3,7 @@
     $.fn.spinner = function(opts) {
         return this.each(function() {
             var defaults = {
-                value: 0,
+                value: 1,
                 min: 0
             }
             var options = $.extend(defaults, opts)
@@ -81,8 +81,12 @@
             }
 
             function getValue(field) {
+            	//data_max
+            	
                 field = field || textField;
-                
+                var data_max=parseFloat(field.attr("data_max")|| 0, 10)
+            	if(field.val()>data_max )
+            		field.val(data_max)
                 if (field.attr("datestyle")=="float")
                 	{
                 		

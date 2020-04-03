@@ -13,6 +13,7 @@ public interface ProductDao{
 	public int insertProduct(Product product);
 	public Product selectProductById(@Param("id") String id);
 	public List<Product> queryProductByPage(RowBounds rowBounds);
+	public List<Product> queryProductAll();
 	public int countProductByInfo(Product product);
 	public int deleteProduct(Product product);
 	public int deleteImg(@Param("id") String id,@Param("src") String src);

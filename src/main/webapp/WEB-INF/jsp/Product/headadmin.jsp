@@ -14,6 +14,8 @@
     <link href="${pageContext.request.contextPath}/CSS/jquery-ui.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/CSS/summernote.css" rel="stylesheet">    
 	<link href="${pageContext.request.contextPath}/CSS/bootstrap.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/CSS/orther/spinner.css" rel="stylesheet">
+	
 	
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.4.1.js" type="text/javascript"></script>		
 	<script src="${pageContext.request.contextPath}/JS/jquery-ui.js" type="text/javascript"></script>	
@@ -63,7 +65,7 @@
 				<a class="iconbounce" href="${pageContext.request.contextPath}/admin/remove" title="删除商品">
 					删除商品
 				</a> 
-				<a class="iconbounce" href="common/service" title="联系客服">
+				<a class="iconbounce" href="${pageContext.request.contextPath}" title="联系客服">
 					返回主页
 				</a>
 				 
