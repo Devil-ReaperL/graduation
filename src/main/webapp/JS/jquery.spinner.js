@@ -85,8 +85,12 @@
             	
                 field = field || textField;
                 var data_max=parseFloat(field.attr("data_max")|| 0, 10)
-            	if(field.val()>data_max )
+            	if(field.val()>data_max && data_max!=0)
+            		{
             		field.val(data_max)
+            		alert("已达到最大值")
+            		}
+            		
                 if (field.attr("datestyle")=="float")
                 	{
                 		

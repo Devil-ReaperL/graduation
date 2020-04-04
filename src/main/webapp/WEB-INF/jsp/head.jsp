@@ -29,7 +29,7 @@
 				 </a> 
 				 <div class="dropdown-content" >
 				    
-					  <a>登出</a>
+					  <a onclick="outUser()">登出</a>
 				  </div>
 			</div>	 
 			
@@ -96,6 +96,23 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function outUser() {
+	$.ajax({
+		 type: "GET",
+       url: "${pageContext.request.contextPath}/common/exit",
+       success: function(data){
+      		if(data)
+      			location.reload()
+       },
+       error: function(XMLHttpRequest,textStatus){
+      	 alert("请求失败"+textStatus)
+
+       }
+	 })
+}
+</script>
+
 
 	
 </body>

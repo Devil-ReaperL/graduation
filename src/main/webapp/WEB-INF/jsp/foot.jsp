@@ -148,7 +148,7 @@
 	<div class="rside-cart iconbounce cart">
 		<a href="${pageContext.request.contextPath}/user/intocart/" title="购物车">
 			<i class="icon-rside icon-cart2 icon"></i>
-			<span>0</span>
+			<!--  <span>0</span>-->
 		</a>
 		<p>购物车</p>
 	</div>
@@ -167,7 +167,7 @@ $(document).ready(function() {
 	if(id !=null){
 		
 		alert(id)
-		location.reload();
+	
 	}
 		
 });

@@ -150,6 +150,15 @@
 	   		alert("添加商品的商品编号已经存在")
 	}
 	function modifySubmitData() {
+		var files1=$(".file-preview-frame").length
+		if(files1<1){
+			alert("请选择上传文件！");
+			return false;
+		}
+	if(files1>8){
+		alert("最多上传4张图片");
+		return false;
+	}
 		$('#spinner1').val(parseFloat($('#spinner1').val()))
 	}
 	function beforeCheck(formData, form, options) {

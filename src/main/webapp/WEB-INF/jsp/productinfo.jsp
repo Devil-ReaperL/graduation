@@ -18,6 +18,7 @@
 <br><br>
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.jqzoom.js"></script>
 	 <script src="${pageContext.request.contextPath}/JS/jquery.spinner.js"></script>	
+	 
 <div class="wrap goods-box">
 		<div class="wl470">
 			<div class="shop-video-pic">
@@ -50,7 +51,7 @@
 			<div class="shop-price-block">
 				<div class="left showbq">
 					
-					<p class="price1 clearfix"><span class="label">促销价</span><span class="y">¥</span><span class="price sell-val">138.00</span></p>
+					<p class="price1 clearfix"><span class="label">促销价</span><span class="y">¥</span><span class="price sell-val">${product.price}</span></p>
 				</div>
 				
 			</div>
@@ -88,8 +89,8 @@
 					<dd><input name="stock" type="text" id="spinner" class="spinner form-control" maxlength="10" value="1"  
 			  			style="width: 100px;font-size:20px;height:40px;
     					text-align: -webkit-center;" datestyle="int" data_max="${product.stock}"/></dd>
-					
-				</dd>
+					<dd><span>（库存${product.stock}件）</span></dd>
+				</dl>
 			</div>
 			<div class="h40"></div>
 			<input name="goods_id" type="hidden" value="492" />

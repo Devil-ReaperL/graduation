@@ -59,8 +59,6 @@ public class UserController {
 	@RequestMapping("/index")
 	public String home(Model model,HttpServletRequest request)
 	{
-		String message=(String)request.getAttribute("message");
-		model.addAttribute("message", message);
 		productService.home(model);
 		return "home";
 	}

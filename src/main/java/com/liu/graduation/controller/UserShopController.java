@@ -2,6 +2,7 @@ package com.liu.graduation.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -55,9 +56,11 @@ public class UserShopController {
     		cart.setUnit(Float.parseFloat(product.getPrice()));
     		cart.setPicture(product.getSrcs().get(0));
     		cart.setNum(count);
+    		cart.setStatus("checked");
     		cart.setAddtime(new Date());
     		cart.setPrice(count*Float.parseFloat(product.getPrice()));
-    		cart.setStatus("0");
+    		
+    		System.out.println("new="+cart);
     		if (shopService.cartAdd(cart)>0) {
     			return "商品添加成功";
 			}
@@ -81,6 +84,7 @@ public class UserShopController {
     	UserBeen user=(UserBeen) session.getAttribute("user");
     	if (user!=null) {
     		model.addAttribute("carts",shopService.findCartByUser(user.getPhonenum()));
+    		model.addAttribute("cart_info",shopService.findCart_infoById(user.getPhonenum()));
     		return "cart";
 		}else {
 			model.addAttribute("message", "请先登录");
@@ -109,9 +113,14 @@ public class UserShopController {
 	@RequestMapping(value="/cartupdata")
 	public Map<String, Object> cartupdata(@Valid Cart cart,Model model,HttpServletRequest request)
 	{
-		System.out.println(cart);
+	
 		Map<String, Object> map=new HashMap<String, Object>();
+		if (shopService.updateCart(cart)==1) {
+			map.put("cart_info", shopService.findCart_infoById(cart.getPhonenum()));
+			map.put("cart", shopService.findCartByKey(cart));
+		}
 		return map;
 		
 	}
+
 }

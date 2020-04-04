@@ -1,5 +1,6 @@
 package com.liu.graduation.entities;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,7 +90,9 @@ public class Product {
 		this.name = name;
 	}
 	public String getPrice() {
-		return price;
+		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+		String p=decimalFormat.format(Float.parseFloat(price));//format 返回的是字符串
+		return p;//format 返回的是字符串
 	}
 	public void setPrice(String price) {
 		this.price = price;

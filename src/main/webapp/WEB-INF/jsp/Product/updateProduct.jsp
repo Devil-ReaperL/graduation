@@ -190,7 +190,7 @@ initFile();
 				return true;
 			}
         if(!confirm("确定删除原文件？删除后不可恢复")){  
-            return false;  
+            return true;  
         }  
 });  
 
@@ -216,14 +216,17 @@ initFile();
 
 	function modifySubmitData() {
 		$('#spinner1').val(parseFloat($('#spinner1').val()))
-		var fileInput = $('#uploadImg').get(0).files[0];
+	
 		var files1=$(".file-preview-frame").length
      
 	    if(files1<1){
 				alert("请选择上传文件！");
 				return false;
 			}
-    	
+		if(files1>8){
+			alert("最多上传4张图片");
+			return false;
+		}
 		if(typeof(fileInput) == "undefined")
 	    {
 	 		$("[name='files']").remove()

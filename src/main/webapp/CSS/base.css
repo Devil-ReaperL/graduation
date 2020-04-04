@@ -3244,7 +3244,7 @@ div.vjs-loading-spinner {
 	line-height: 33px;
 	margin-right: 2px;
 	color: #333;
-	background-color: #f6f6f6;
+	/*background-color: #f6f6f6;*/
 	float: left;
 }
 .shop-num dl dd a{

@@ -69,8 +69,10 @@
     </trim>
      on duplicate key update
     num=if(num+#{num,jdbcType=INTEGER}>stock,stock,num+#{num,jdbcType=INTEGER}),
-    price=if(num=stock,stock*unit,price+#{price,jdbcType=FLOAT}*unit),
-    endtime=null
+    price=if(num=stock,stock*unit,num*unit),
+    endtime=null,
+    status=#{status,jdbcType=VARCHAR},
+    addtime=#{addtime,jdbcType=TIMESTAMP}
   </insert>
   <select id="findCartByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
         select * from shopcart
@@ -83,4 +85,34 @@
 		SET endtime=#{endtime,jdbcType=TIMESTAMP}
 		WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
    </update>
+   <update id="updataCart" parameterType="com.liu.graduation.entities.Cart">
+   		UPDATE shopcart
+		SET 
+   			num=if(#{num,jdbcType=INTEGER}>stock,stock,#{num,jdbcType=INTEGER}),
+    		price=if(num=stock,stock*unit,num*unit),
+    		endtime=null
+    		<if test="status != null and status !=''" >      		
+    		,status=#{status,jdbcType=VARCHAR}
+    		</if>
+		WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
+   </update>
+     <select id="findCartByKey" resultMap="BaseResultMap" parameterType="com.liu.graduation.entities.Cart">
+        select * from shopcart
+        WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
+        AND endtime is null 
+        order by addtime desc
+   </select>
+   <update id="cartcheck" parameterType="com.liu.graduation.entities.Cart">
+   		UPDATE shopcart
+		SET 
+   			status=#{status,jdbcType=VARCHAR}
+		WHERE phonenum= #{phonenum,jdbcType=VARCHAR}
+		<if test="product_id != null" >
+     	 and product_id= #{product_id,jdbcType=VARCHAR}
+      </if> 
+   </update>
+   <select id="findCart_infoById" resultType="com.liu.graduation.entities.Cart_info" parameterType="java.lang.String">
+        select * from shopcart_info
+        where phonenum=#{user}
+   </select>
 </mapper>

@@ -72,8 +72,6 @@ public class ProductController {
 	@ResponseBody
 	public String updateProduct(@Valid Product product,Model model)
 	{
-			
-		System.out.println(product);
 		
 		productService.updateProduct(product);
 		return "true";
