@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/base.css" />
 	<link href="${pageContext.request.contextPath}/CSS/showDialog.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/CSS/jqzoom.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.request.contextPath}/CSS/orther/nav.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.request.contextPath}/CSS/orther/spinner.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/CSS/other/nav.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/CSS/other/spinner.css" rel="stylesheet">
 
    
 </head>

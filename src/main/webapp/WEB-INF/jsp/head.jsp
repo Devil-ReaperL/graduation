@@ -9,6 +9,8 @@
     <link href="${pageContext.request.contextPath}/CSS/base.css"  rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/CSS/showDialog.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-2.1.4.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.showDialog.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.lazyload.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/app.min.js"></script>
@@ -41,7 +43,7 @@
 					   				  
 		</c:choose>
     	
-        <a class="iconbounce"  title="我的好花" href="https://www.haohua.com/why/"><i class="icon icon-my" ></i>我的好花</a>
+        <a class="iconbounce"  title="我的好花" href="${pageContext.request.contextPath}/shop/management"><i class="icon icon-my" ></i>我的好花</a>
         <a class="iconbounce" href="JSP/service.jsp" onclick="openChat();" title="联系客服"><i class="icon icon-service"></i>联系客服</a>
         <a class="iconbounce cart2" href="${pageContext.request.contextPath}/user/intocart/" title="购物车"><i class="icon icon-cart"></i>购物车<span></span></a>
     </div>
@@ -103,7 +105,8 @@ function outUser() {
        url: "${pageContext.request.contextPath}/common/exit",
        success: function(data){
       		if(data)
-      			location.reload()
+      			history.pushState("", "", "${pageContext.request.contextPath}/login/index");
+      			window.location.replace('${pageContext.request.contextPath}/login/index')
        },
        error: function(XMLHttpRequest,textStatus){
       	 alert("请求失败"+textStatus)

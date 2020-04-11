@@ -37,7 +37,7 @@
 					   				  
 		</c:choose>
     	
-        <a class="iconbounce"  title="我的好花" href="https://www.haohua.com/why/"><i class="icon icon-my" ></i>我的好花</a>
+        <a class="iconbounce"  title="我的好花" href="${pageContext.request.contextPath}/shop/management"><i class="icon icon-my" ></i>我的好花</a>
         <a class="iconbounce" href="JSP/service.jsp" onclick="openChat();" title="联系客服"><i class="icon icon-service"></i>联系客服</a>
         <a class="iconbounce cart2" href="${pageContext.request.contextPath}/GetGoods" title="购物车"><i class="icon icon-cart"></i>购物车<span></span></a>
     </div>
@@ -83,7 +83,7 @@
                     </div>
 
                 </dt>
-                <dd><a href="${pageContext.request.contextPath}/User_Servlet?method=login&phonenum=${user}&password=${password}">首页</a></dd>
+                <dd><a href="${pageContext.request.contextPath}/">首页</a></dd>
                 <dd><a href="#zxz" >爱情鲜花</a></dd>
 
                 <dd><a href="#zxz" >永生花</a></dd>

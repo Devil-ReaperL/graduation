@@ -18,6 +18,7 @@ public interface ProductDao{
 	public int deleteProduct(Product product);
 	public int deleteImg(@Param("id") String id,@Param("src") String src);
 	public int updateProduct(Product product);
+	public int updateProductStock(@Param("order") String order);
 	public List<Product> queryProductBykey(@Param("key")String key,RowBounds rowBounds);
 	public int countProductBykey(@Param("key")String key);
 }

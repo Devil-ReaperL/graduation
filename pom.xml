@@ -31,7 +31,7 @@
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
- 
+ 		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -119,7 +119,12 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		
+		<!-- Snowflake雪花算法，优点：生成有顺序的id，提高数据库的性能 -->
+		 <dependency>
+			<groupId>xyz.downgoon</groupId>
+			<artifactId>snowflake</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		
 		<!-- 格式化对象，方便输出日志 -->
 		<dependency>

@@ -172,7 +172,14 @@
 	</select>
 	<select id="queryProductAll" resultMap="BaseResultMap" >
         select * from product
-        where endtime is null
+        where endtime is null and stock>0
     </select>
+    <update id="updateProductStock" parameterType="java.lang.String">
+    	
+		update product 
+		set stock =stock-(select num from order_product where order_id=#{order,jdbcType=VARCHAR} and product_id=product.id)
+		WHERE id in (select product_id from order_product where order_id=#{order,jdbcType=VARCHAR})
+		    
+    </update>
 	
 </mapper>

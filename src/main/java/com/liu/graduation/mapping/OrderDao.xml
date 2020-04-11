@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.graduation.dao.OrderDao">
+	<resultMap id="orderResultMap" type="com.liu.graduation.entities.Order" >
+ 		<id column="id" property="id" jdbcType="VARCHAR" />
+	    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
+	    <result column="total" property="total" jdbcType="INTEGER" />
+		<result column="message" property="message" jdbcType="LONGVARCHAR" />   
+		<result column="payment" property="payment" jdbcType="VARCHAR" /> 
+		<result column="logistics" property="logistics" jdbcType="VARCHAR" />
+	    <result column="address_id" property="address_id" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="count_price" property="count_price" jdbcType="FLOAT" />
+	    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+	    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />  
+	    <association property="address" javaType="com.liu.graduation.entities.Address">
+		    <id column="address_id" property="id" jdbcType="VARCHAR" />
+		    <result column="userid" property="userid" jdbcType="VARCHAR" />
+		    <result column="phone" property="phonenum" jdbcType="VARCHAR" /> 
+			<result column="province" property="province" jdbcType="VARCHAR" />   
+			<result column="city" property="city" jdbcType="VARCHAR" /> 
+			<result column="county" property="county" jdbcType="VARCHAR" />
+			<result column="details" property="details" jdbcType="LONGVARCHAR" />
+	    </association>
+	    <association property="order_logistics" javaType="com.liu.graduation.entities.Order_logistics">
+	    	<id column="id" property="order_id" jdbcType="VARCHAR" />
+		    <result column="product_id" property="product_id" jdbcType="VARCHAR" />
+		    <result column="courier_id" property="courier_id" jdbcType="VARCHAR" />
+			<result column="address_id" property="address_id" jdbcType="VARCHAR" />   
+			<result column="delivery_time" property="delivery_time" jdbcType="TIMESTAMP" /> 
+			<result column="segment" property="segment" jdbcType="VARCHAR" />
+			<result column="Receive_time" property="Receive_time" jdbcType="TIMESTAMP" />
+	    </association>
+	    <collection property="pList"  ofType="com.liu.graduation.entities.Order_product">
+		    <id column="product_id" property="product_id" jdbcType="VARCHAR" />
+		    <result column="product_name" property="product_name" jdbcType="VARCHAR" />
+			<result column="product_src" property="product_src" jdbcType="VARCHAR" />   
+			<result column="num" property="num" jdbcType="INTEGER" /> 
+			<result column="price" property="price" jdbcType="FLOAT" />	
+	    </collection>
+  	</resultMap>
+  	
+	
+
+	<insert id="insertAddress" parameterType="com.liu.graduation.entities.Address" >    
+    insert into Address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >id,</if>
+      <if test="userid != null" >userid,</if>
+      <if test="phonenum != null" >phonenum,</if>
+      <if test="province != null" >province,</if>
+      <if test="city != null" >city,</if>
+      <if test="county != null" >county,</if>
+      <if test="details != null" >details,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+       <if test="province != null" >
+      	#{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+      	#{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+      	#{county,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="details != null" >
+      #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertOrder_logistics" parameterType="com.liu.graduation.entities.Order_logistics" >
+    
+    insert into Order_logistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="order_id != null" >order_id,</if>
+      <if test="product_id != null" >product_id,</if>
+      <if test="courier_id != null" >courier_id,</if>
+      <if test="address_id != null" >address_id,</if>
+      <if test="delivery_time != null" >delivery_time,</if>
+      <if test="segment != null" >segment,</if>
+      <if test="Receive_time != null" >Receive_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="order_id != null" >
+        #{order_id,jdbcType=VARCHAR},
+      </if>
+      <if test="product_id != null" >
+        #{product_id,jdbcType=VARCHAR},
+      </if>
+      <if test="courier_id != null" >
+        #{courier_id,jdbcType=VARCHAR},
+      </if>
+       <if test="address_id != null" >
+        #{address_id,jdbcType=VARCHAR},
+      </if>
+      <if test="delivery_time != null" >
+        #{delivery_time,jdbcType=TIMESTAMP},
+      </if>
+       <if test="segment != null" >
+      	#{segment,jdbcType=VARCHAR},
+      </if>
+      <if test="Receive_time != null" >
+      	#{Receive_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertOrder_product" parameterType="com.liu.graduation.entities.Order_product" >
+    
+		   
+		INSERT INTO order_product
+		 (order_id,product_id,product_name,product_src,num,price)
+		SELECT #{order_id,jdbcType=VARCHAR},product_id,product.name,SUBSTRING_INDEX(product.src,';',1),num,price
+		FROM shopcart join product on shopcart.product_id=product.id
+		where shopcart.status='checked'  AND shopcart.endtime IS null
+		and shopcart.phonenum=#{user,jdbcType=VARCHAR}
+    
+  </insert>
+  
+   <insert id="insertOrder" parameterType="com.liu.graduation.entities.Order" >
+    
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >id,</if>
+      <if test="phonenum != null" >phonenum,</if>
+      <if test="total != null" >total,</if>
+      <if test="message != null" >message,</if>
+      <if test="payment != null" >payment,</if>
+      <if test="logistics != null" >logistics,</if>
+      <if test="address_id != null" >address_id,</if>
+      <if test="status != null" >status,</if>
+      <if test="count_price != null" >count_price,</if>
+      <if test="addtime != null" >addtime,</if>
+      <if test="endtime != null" >endtime,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+       <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="payment != null" >
+        #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="logistics != null" >
+        #{logistics,jdbcType=VARCHAR},
+      </if>
+       <if test="address_id != null" >
+      	#{address_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+      	#{status,jdbcType=VARCHAR},
+      </if>
+      <if test="count_price != null" >
+      	#{count_price,jdbcType=FLOAT},
+      </if>
+      <if test="addtime != null" >
+      #{addtime,jdbcType=TIMESTAMP},
+      </if>    
+      <if test="endtime != null" >
+      #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    
+  </insert>
+    <select id="findOrderByid" resultType="com.liu.graduation.entities.Order" >
+        select * from `Order`
+        WHERE id=#{id,jdbcType=VARCHAR}
+    </select>
+    <select id="findAddressByid" resultType="com.liu.graduation.entities.Address" >
+        select * from `Address`
+        WHERE id=#{id,jdbcType=VARCHAR}
+    </select>
+    <select id="findOrder_logisticsByid" resultType="com.liu.graduation.entities.Order_logistics" >
+        select * from Order_logistics
+        WHERE order_id=#{id,jdbcType=VARCHAR}
+    </select>
+    <select id="findOrder_productByid" resultType="com.liu.graduation.entities.Order_product" >
+        select * from Order_product
+        WHERE order_id=#{id,jdbcType=VARCHAR}
+    </select>
+    <update id="updateOrder">
+    	update `Order`
+    	set status='10',payment=#{way,jdbcType=VARCHAR}
+    	where id=#{id,jdbcType=VARCHAR}
+    </update>
+    <select id="findOrderByUser" resultMap="orderResultMap">
+    	SELECT *
+		FROM `order_info` 
+        WHERE phonenum=#{user,jdbcType=VARCHAR}
+        order by addtime desc
+    </select>
+    <select id="findOrder" resultMap="orderResultMap">
+    	SELECT *
+		FROM `order_info` 
+        WHERE phonenum=#{user,jdbcType=VARCHAR}
+        <if test="status != null and status !=''" >
+      	and status={status,jdbcType=VARCHAR}
+      </if> 
+      <if test="status ==''" >
+      	and status is null
+      </if>
+        order by addtime desc
+    </select>    
+</mapper>

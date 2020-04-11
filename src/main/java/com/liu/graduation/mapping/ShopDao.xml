@@ -16,18 +16,18 @@
 	    <result column="Unit" property="Unit" jdbcType="FLOAT" />
 	    <result column="status" property="status" jdbcType="VARCHAR" />    
   	</resultMap>
+  	<sql id="selectinfo">
+  		select phonenum,product_id,p.name AS product_name,num,p.stock,p.src as picture,s.num*p.price as price,p.price as Unit,STATUS,s.addtime,s.endtime
+		from shopcart s join product p on s.product_id=p.id
+  	
+  	</sql>
   	
     <insert id="insertCart" parameterType="com.liu.graduation.entities.Cart">
     insert into shopcart
      <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="phonenum != null" >phonenum,</if>
       <if test="product_id != null" >product_id,</if>
-      <if test="product_name != null" >product_name,</if>
       <if test="num != null" >num,</if>
-      <if test="stock != null" >stock,</if>
-      <if test="picture != null" >picture,</if>
-      <if test="price != null" >price,</if>
-      <if test="Unit != null" >Unit,</if>
       <if test="status != null" >status,</if>
       <if test="addtime != null" >addtime,</if>
       <if test="endtime != null" >endtime,</if>
@@ -39,23 +39,9 @@
       <if test="product_id != null" >
         #{product_id,jdbcType=VARCHAR},
       </if>
-      <if test="product_name != null" >
-        #{product_name,jdbcType=VARCHAR},
-      </if>
+      
       <if test="num != null" >
         #{num,jdbcType=INTEGER},
-      </if>
-       <if test="stock != null" >
-      	#{stock,jdbcType=INTEGER},
-      </if>
-      <if test="picture != null" >
-      	#{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-      	#{price,jdbcType=FLOAT},
-      </if>
-      <if test="Unit != null" >
-      	#{Unit,jdbcType=FLOAT},
       </if>
       <if test="status != null" >
       #{status,jdbcType=VARCHAR},
@@ -68,28 +54,40 @@
       </if>
     </trim>
      on duplicate key update
-    num=if(num+#{num,jdbcType=INTEGER}>stock,stock,num+#{num,jdbcType=INTEGER}),
-    price=if(num=stock,stock*unit,num*unit),
-    endtime=null,
-    status=#{status,jdbcType=VARCHAR},
-    addtime=#{addtime,jdbcType=TIMESTAMP}
+     num=if(endtime is null,num+#{num,jdbcType=INTEGER},#{num,jdbcType=INTEGER}),
+     num=if(num>(select stock from  product where id=#{product_id,jdbcType=VARCHAR}),(select stock from  product where id=#{product_id,jdbcType=VARCHAR}),num),
+     endtime=null,
+     status=#{status,jdbcType=VARCHAR},
+     addtime=#{addtime,jdbcType=TIMESTAMP}
+ 
   </insert>
+   <select id="findCartByChecked" resultMap="BaseResultMap" parameterType="java.lang.String">
+       <include refid="selectinfo"/>
+        where s.phonenum=#{user}
+        AND s.endtime is null and s.status="checked"
+        order by s.addtime desc
+   </select>
   <select id="findCartByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select * from shopcart
-        where phonenum=#{user}
-        AND endtime is null 
-        order by addtime desc
+        <include refid="selectinfo"/>
+        where s.phonenum=#{user}
+        AND s.endtime is null 
+        and s.num>0
+        order by s.addtime desc
    </select>
    <update id="deleteCart" parameterType="com.liu.graduation.entities.Cart">
    		UPDATE shopcart
 		SET endtime=#{endtime,jdbcType=TIMESTAMP}
 		WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
    </update>
+   <update id="updataCartByOrder" parameterType="java.lang.String">
+   		UPDATE shopcart
+		SET endtime=CURDATE()
+		WHERE phonenum= #{user,jdbcType=VARCHAR} and status='checked' and endtime is null
+   </update>
    <update id="updataCart" parameterType="com.liu.graduation.entities.Cart">
    		UPDATE shopcart
 		SET 
-   			num=if(#{num,jdbcType=INTEGER}>stock,stock,#{num,jdbcType=INTEGER}),
-    		price=if(num=stock,stock*unit,num*unit),
+   			num=if(#{num,jdbcType=INTEGER}>(select stock from  product where id=#{product_id,jdbcType=VARCHAR}),(select stock from  product where id=#{product_id,jdbcType=VARCHAR}),#{num,jdbcType=INTEGER}),
     		endtime=null
     		<if test="status != null and status !=''" >      		
     		,status=#{status,jdbcType=VARCHAR}
@@ -97,10 +95,10 @@
 		WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
    </update>
      <select id="findCartByKey" resultMap="BaseResultMap" parameterType="com.liu.graduation.entities.Cart">
-        select * from shopcart
-        WHERE phonenum= #{phonenum,jdbcType=VARCHAR} and product_id= #{product_id,jdbcType=VARCHAR}
-        AND endtime is null 
-        order by addtime desc
+        <include refid="selectinfo"/>
+        WHERE s.phonenum= #{phonenum,jdbcType=VARCHAR} and s.product_id= #{product_id,jdbcType=VARCHAR}
+        AND s.endtime is null 
+        order by s.addtime desc
    </select>
    <update id="cartcheck" parameterType="com.liu.graduation.entities.Cart">
    		UPDATE shopcart
@@ -111,6 +109,7 @@
      	 and product_id= #{product_id,jdbcType=VARCHAR}
       </if> 
    </update>
+   
    <select id="findCart_infoById" resultType="com.liu.graduation.entities.Cart_info" parameterType="java.lang.String">
         select * from shopcart_info
         where phonenum=#{user}

@@ -86,7 +86,8 @@ public class Cart {
 
 
 	public void setPicture(String picture) {
-		this.picture = picture;
+		String[] s=picture.split(";");
+		this.picture = s[0];
 	}
 
 

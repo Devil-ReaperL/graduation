@@ -16,4 +16,7 @@ public interface AreaDao {
 	// 查询县区
 	public List<BaseArea> findCounty(@Param("city")String city);
 	
+	// 查询县区
+	public String findName(@Param("id") String id);
+	
 }

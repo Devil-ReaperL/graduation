@@ -4,22 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.liu.graduation.dao.AreaDao">
-<select id="findProvince" resultType="com.base.vo.BaseArea">
+<select id="findProvince" resultType="com.liu.graduation.entities.support.BaseArea">
 		SELECT DISTINCT
 		area.base_areaid,area.name FROM base_area area where 1=1 and
 		area.parentid='0'
 	</select>
-	<select id="findCity" resultType="com.base.vo.BaseArea" parameterType="java.lang.String">
+	<select id="findCity" resultType="com.liu.graduation.entities.support.BaseArea" parameterType="java.lang.String">
 		SELECT DISTINCT
 		area.base_areaid,area.name FROM base_area area where 1=1 and
 		area.parentid=#{province}
 	</select>
-	<select id="findCounty" resultType="com.base.vo.BaseArea" parameterType="java.lang.String">
+	<select id="findCounty" resultType="com.liu.graduation.entities.support.BaseArea" parameterType="java.lang.String">
 		SELECT DISTINCT
 		area.base_areaid as base_areaid,area.name as name
 		FROM base_area area
 		where 1=1 and
 		area.parentid=#{city}
     </select>
+    <select id="findName" resultType="java.lang.String">
+		SELECT DISTINCT area.name 
+		FROM base_area area where 1=1 and
+		area.base_areaid=#{id}
+	</select>
     
 </mapper>

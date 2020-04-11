@@ -219,16 +219,8 @@ $(function(){
 	//显示侧边栏
 	showRside();
 
-	//表单
-	$('input[pattern]').change(function(){
-		var regExp = eval( $(this).attr('pattern') );
-		if( regExp.test( $(this).val() ) ){
-			$(this).css({borderColor:''});
-		}
-		else{ 
-			$(this).css({borderColor:'#ff2f2f'});
-		}
-	});
+	
+	
 
 	//ajax ok
 	$('a[res=ajax]').click(function(){

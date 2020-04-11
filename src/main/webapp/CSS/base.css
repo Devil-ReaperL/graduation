@@ -4485,21 +4485,21 @@ div.vjs-loading-spinner {
 }
 .khzx-menu dl{
 	height: 40px;
-	margin: 15px 0;
+	/*margin: 15px 0;*/
 	overflow: hidden;
 }
 .khzx-menu dl.active{ 
 	height: auto;
 }
 .khzx-menu dl.active dt{ 
-	margin-bottom: 20px;
+	/*margin-bottom: 20px;*/
 }
 .khzx-menu dl.active dd:last-child{ 
-	padding-bottom: 20px;
+	/*padding-bottom: 20px;*/
 }
 .khzx-menu dl dt{
 	position: relative;
-	height: 40px;
+	/*height: 40px;*/
 	line-height: 40px;
 }
 .khzx-menu dl dt a{
@@ -5041,8 +5041,7 @@ a.button-small{
 	color: #333;
 }
 .cart-order .cart-address{
-	padding: 30px 50px;
-	border: 2px dashed #dcdcdc;
+
 }
 .cart-order .cart-address ul li{
 	height: 35px;
@@ -5085,7 +5084,7 @@ a.button-small{
 	float: left;
 }
 .cart-body{ 
-	width: 1025px;
+	/*width: 1025px;*/
 	float: left;
 }
 .cart-demo-input{
@@ -5187,7 +5186,7 @@ a.button-small{
 
 .address-frm{}
 .address-frm .frm-row{
-	margin: 15px 0;
+	/*margin: 15px 0;*/
 }
 .address-frm .frm-row .row-label{
 	width: 100px;
