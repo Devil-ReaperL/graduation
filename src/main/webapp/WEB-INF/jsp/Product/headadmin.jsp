@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +13,7 @@
 	<link href="${pageContext.request.contextPath}/CSS/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/CSS/jquery-ui.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/CSS/summernote.css" rel="stylesheet">    
-	<link href="${pageContext.request.contextPath}/CSS/bootstrap.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/CSS/orther/spinner.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/CSS/other/spinner.css" rel="stylesheet">
 	
 	
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.4.1.js" type="text/javascript"></script>		
@@ -53,19 +52,19 @@
 				 -->
 			</div>
 			<div class="right">
+				<c:if test="${not empty root}">
 				<a class="Mine.jsp" href="${pageContext.request.contextPath}/admin/search"  title="查看全部商品">
 					查看全部商品
 				</a> 
 				<a class="Mine.jsp" href="${pageContext.request.contextPath}/admin/add"  title="添加商品">
 					添加商品
 				</a>
-				<a class="Mine.jsp" href="${pageContext.request.contextPath}/admin/modify"  title="修改商品">
-					修改商品
-				</a>  
-				<a class="iconbounce" href="${pageContext.request.contextPath}/admin/remove" title="删除商品">
-					删除商品
+				 
+				<a class="iconbounce" href="${pageContext.request.contextPath}/admin/order" title="订单管理">
+					订单管理
 				</a> 
-				<a class="iconbounce" href="${pageContext.request.contextPath}" title="联系客服">
+				</c:if>
+				<a class="iconbounce" href="${pageContext.request.contextPath}" title="返回主页">
 					返回主页
 				</a>
 				 
@@ -75,7 +74,7 @@
 	</div>
 
 	<div class="header2brt">
-		<div class="wrap header ">
+		<div class="wrap header " style="height: 100px">
 			<div class="logobanner clearfix">
 				<div class="logo">
 					<a href="#" title="【BTS网】专注鲜花电商，只做品质鲜花！"><img src="${pageContext.request.contextPath }/img/logo.png" width="248" height="41" alt="BTS网" /></a>

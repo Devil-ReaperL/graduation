@@ -63,7 +63,7 @@
   </insert>
   
   <select id="selectProductById" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select * from product
+        select * from product_info
         where id=#{id}
     </select>
     <select id="queryProductByPage" resultMap="BaseResultMap" parameterType="com.liu.graduation.entities.Product">
@@ -176,10 +176,20 @@
     </select>
     <update id="updateProductStock" parameterType="java.lang.String">
     	
-		update product 
-		set stock =stock-(select num from order_product where order_id=#{order,jdbcType=VARCHAR} and product_id=product.id)
-		WHERE id in (select product_id from order_product where order_id=#{order,jdbcType=VARCHAR})
+		update product p,(select num,product_id from order_product where order_id=#{order,jdbcType=VARCHAR} ) t
+		set stock =stock-t.num,sales=sales+t.num
+		WHERE t.product_id=p.id and p.id in (select product_id from order_product where order_id=#{order,jdbcType=VARCHAR})
 		    
     </update>
-	
+	<select id="findProductById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT p.id,p.name,p.price,p.src,p.stock,a.name AS attr,p.summernote,p.addtime,p.endtime 
+		from product p join attr a ON p.attr=a.id
+		WHERE p.id=#{id,jdbcType=VARCHAR}
+	</select>
+	<select id="queryProductBySales" resultMap="BaseResultMap">
+		select *
+		from product 
+		order BY sales desc
+		limit #{num,jdbcType=INTEGER}
+	</select>
 </mapper>

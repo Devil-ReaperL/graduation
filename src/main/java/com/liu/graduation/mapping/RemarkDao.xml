@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.graduation.dao.RemarkDao">
+	<resultMap id="BaseResultMap" type="com.liu.graduation.entities.Remark" >
+	    <id column="remark_id" property="remark_id" jdbcType="INTEGER" />
+	    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
+	    <result column="product_id" property="product_id" jdbcType="VARCHAR" />
+	    <result column="rank" property="rank" jdbcType="INTEGER" />
+	    <result column="time" property="time" jdbcType="TIMESTAMP" />
+	    <result column="text" property="text" jdbcType="LONGVARCHAR" />
+	    <result column="remark_src" property="remark_src" jdbcType="LONGVARCHAR" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />	    
+  	</resultMap>
+  	<insert id="insertRemark" parameterType="com.liu.graduation.entities.Remark">
+  	   insert into remark
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="remark_id != null" >remark_id,</if>
+      <if test="phonenum != null" >phonenum,</if>
+      <if test="product_id != null" >product_id,</if>
+      <if test="rank != null" >`rank`,</if>
+      <if test="time != null" >`time`,</if>
+      <if test="text != null" >`text`,</if>
+      <if test="remark_src != null" >remark_src,</if>
+      <if test="address != null" >address,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="remark_id != null" >
+        #{remark_id,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="product_id != null" >
+        #{product_id,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=FLOAT},
+      </if>
+       <if test="time != null" >
+      	#{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="text != null" >
+      	#{text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark_src != null" >
+      	#{remark_src,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+      #{address,jdbcType=VARCHAR},
+      </if>
+     
+    </trim>
+  	</insert>
+     
+    <select id="queryRemarkById" resultMap="BaseResultMap">
+    	select *
+    	from remark
+    	where product_id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

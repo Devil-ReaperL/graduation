@@ -277,7 +277,37 @@ $(function(){
 		});
 		return false;
 	});
-
+	$('a[res=prompt]').click(function(){
+		var url = $(this).data('url') ? $(this).data('url') : $(this).attr('href');
+		var width = $(this).data('width') ? $(this).data('width') : 500;
+		var title = $(this).attr('message') ? $(this).attr('message') : $(this).text();
+		var order='#'+$(this).attr('order')
+		var btn=$(this)
+		showPrompt(title , function(id){
+			$.ajax({
+				 type: "post",
+			      url: url,
+			      data:{"id":id
+			   	   },
+			   	 async: false,	
+			      success: function(data){
+			    	  if(data)
+			    		  {
+			    		  showInfo("成功发货","",3)
+			    		  $(order).text("正在配送")
+			    		  $(btn).remove()
+			    		 
+			    		  }
+			      },
+			      error: function(XMLHttpRequest,textStatus){
+			    	  showDialog("alert", "读取数据失败");
+	
+			      }
+				 })
+		});
+		
+		return false;
+	});
 	//favorite
 	if( $('a[res="favorite"]')[0] ){
 		$('a[res="favorite"]').click(function(){

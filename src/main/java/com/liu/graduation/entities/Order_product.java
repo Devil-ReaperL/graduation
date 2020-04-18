@@ -1,6 +1,9 @@
 package com.liu.graduation.entities;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Order_product {
 	
@@ -11,13 +14,35 @@ public class Order_product {
 	private String product_src;
 	private int num;
 	private float price;
+	private String remark;
+	private Date addtime;
+	
 	
 	
 	@Override
 	public String toString() {
 		return "Order_product [order_id=" + order_id + ", user=" + user + ", product_id=" + product_id
 				+ ", product_name=" + product_name + ", product_src=" + product_src + ", num=" + num + ", price="
-				+ price + "]";
+				+ price + ", remark=" + remark + ", addtime=" + addtime + "]";
+	}
+	public String getAddtime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(addtime!=null)
+		return sdf.format(addtime);
+		else
+			return null;
+	}
+	public void setAddtime(Date addtime)  {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			if(addtime!=null) {
+				this.addtime=sdf.parse(sdf.format(addtime));				
+			}
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	public String getUser() {
 		return user;
@@ -61,6 +86,12 @@ public class Order_product {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	

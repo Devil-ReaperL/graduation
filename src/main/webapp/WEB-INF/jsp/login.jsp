@@ -33,17 +33,16 @@
 				</a>
 			</div>
 			<div class="right">
-				<a class="iconbounce login" href="${pageContext.request.contextPath}/admin/into" title="超级管理员登录"><i class="icon icon-login"></i>超级管理员登录</a>
 				<a class="iconbounce" href="${pageContext.request.contextPath}/common/service" title="联系客服"><i class="icon icon-service"></i>联系客服</a>
 			</div>
 		</div>
 	</div>
 
 	<div class="header2brt">
-		<div class="wrap header ">
+		<div class="wrap header " style="height: 100px">
 			<div class="logobanner clearfix">
 				<div class="logo">
-					<a href="//www.haohua.com/" title="【BTS网】专注鲜花电商，只做品质鲜花！"><img src="${pageContext.request.contextPath}/img/logo.png" width="248" height="41" alt="BTS网" /></a>
+					<a href="${pageContext.request.contextPath}/" title="【BTS网】专注鲜花电商，只做品质鲜花！"><img src="${pageContext.request.contextPath}/img/logo.png" width="248" height="41" alt="BTS网" /></a>
 				</div>
 			</div>
 		</div>
@@ -79,8 +78,8 @@
 							
 							<li>
 								<div class="loginfrm-group">
-									<p class="loginfrm-loading">${error}</p>
-									<input class="button-big button-block login-submit" type="submit" value="登录"/>
+									<p class="loginfrm-loading">${error}</p>								
+									<button class="button-big button-block login-submit" onclick="userlogin()">登录</button>
 								</div>
 							</li>
 							<li>
@@ -98,11 +97,19 @@
 	<div class="wrap tc">
 		<img src="${pageContext.request.contextPath}/img/sbj.jpg" width="1069" height="116" />
 		<div class="fcopyright">
-			<p class="note">网站声明：本站由软工七班的最帅六人组完成，涛总真滴帅！！！/p>
+			<p class="note">网站声明：毕业设计/p>
 		</div>
 		<div class="h30"></div>
     </div>
-
+	<script type="text/javascript">
+	$(function(){
+	
+		console.log("%c admin：http://localhost:8090/${pageContext.request.contextPath}/admin/into","color:red")
+		}); 
+	function userlogin() {
+		history.pushState("", "", "${pageContext.request.contextPath}/login/user_login");
+	}
+	</script>
 </body>
 </html>
 

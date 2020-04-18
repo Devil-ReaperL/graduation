@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <html>
 <head>
     <title>鲜花速递网站-好花网!网上订鲜花,百株好花只取一朵精华</title>
@@ -58,7 +59,7 @@
 
 			<div class="shop-sellinfo">
 				<ul class="clearfix">
-					<li>访问：<span>7546</span></li>
+					<li>访问：<span>${product.sales * 7 +3}</span></li>
 					
 				</ul>
 			</div>
@@ -66,14 +67,14 @@
 			<div class="shop-sellinfo">
 				<ul class="clearfix">
 					
-					<li>销量：<span>2339</span></li>
+					<li>销量：<span>${product.sales}</span></li>
 					
 				</ul>
 			</div>
 			<div class="shop-sellinfo">
 				<ul class="clearfix">
 					
-					<li>评价：<span>1812</span></li>
+					<li>评价：<span>${product.remark_count}</span></li>
 					
 				</ul>
 			</div>
@@ -98,7 +99,7 @@
 			<input name="product_key" type="hidden" value="" />
 			<div class="shop-but">
 				
-				<a class="buy cartBuy" href="javascript:;" data-url="//www.haohua.com/shop/cart/buy/product/{id}/num/{num}/">立即抢购</a>
+				<a class="buy cartBuy" href="javascript:;" onclick="buyNow('${product.id}')">立即抢购</a>
 
 			
 				<a class="cart cartAdd" href="javascript:;" onclick="cartAdd('${product.id}')">加入购物车</a>
@@ -112,11 +113,11 @@
 			<div class="shop-service">
 				<dl class="clearfix">
 					<dt><b>服务承诺</b>：</dt>
-					<dd><a href="/why/" target="_blank"><i class="icon icon-fs6"></i>1小时全国送达</a></dd>
+					<dd><a href="javascript:;" ><i class="icon icon-fs6"></i>1小时全国送达</a></dd>
 					
-					<dd><a href="/why/" target="_blank"><i class="icon icon-fs3"></i>新鲜花材</a></dd>
+					<dd><a href="javascript:;" ><i class="icon icon-fs3"></i>新鲜花材</a></dd>
 					
-					<dd><a href="/why/" target="_blank"><i class="icon icon-fs7"></i>及时售后服务</a></dd>
+					<dd><a href="javascript:;" ><i class="icon icon-fs7"></i>及时售后服务</a></dd>
 				</dl>
 			</div>
 		</div>
@@ -134,17 +135,19 @@
 			<div class="box box-rxxh ">
 				<div class="box-bar"><p class="box-bar-title">热销鲜花</p></div>
 				<div class="box-con">
-					<ul>																
+					<ul>
+						<c:forEach items="${sales}" var="sale">																
 						<li>
 							<a class="imgbounce" href="/xianhua/46431.html" title="商品">
-								<div class="img"><img src="//www.haohua.com/upload/image/2019-06/12/27257_17604.jpg" width="84" height="84" /></div>
+								<div class="img"><img src="/image/${sale.srcs[0]}" width="84" height="84" /></div>
 								<div class="txt">
-									<h5>Cherish珍爱鲜花系列66枝戴安娜+白相思梅</h5>
-									<div class="price b"><span>¥</span>528.00<label>人气1342</label></div>
+									<h5>${sale.name}</h5>
+									<div class="price b"><span>¥</span>${sale.price}<label>人气${sale.sales}</label></div>
 								</div>
 								<div class="clear"></div>
 							</a>
 						</li>
+						</c:forEach>
 						<li>
 							<a class="imgbounce" href="/xianhua/46064.html" title="商品">
 								<div class="img"><img src="//www.haohua.com/upload/image/2019-06/13/19869_ef1a.jpg" width="84" height="84" /></div>
@@ -176,7 +179,7 @@
 							 商品详情
 						</a>
 					</li>
-					<li><a style="font-size: 18px" href="#reward" data-toggle="tab">用户评价(<span>1812</span>)</a></li>
+					<li><a style="font-size: 18px" href="#reward" data-toggle="tab">用户评价(<span>${product.remark_count}</span>)</a></li>
 				</ul>
 			</div>
 
@@ -191,15 +194,21 @@
 			
 				<div class="tab-pane fade" id="reward">
 				<div class="h60"></div>
-			<div class="body-box yhpj">
-			
+				
+				<div class="body-box yhpj">
+				<c:if test="${product.remark_count==0}">
+					<div style=" width: 100%;text-align: center;">
+					<label>暂无评价</label>
+					</div>
+				</c:if>
+				<c:if test="${product.remark_count>0}">
 				
 				<div class="body-haoping">
 					
 					<div class="left">
 						<p>好评率</p>
-						<div class="haoping-score">99.75%</div>
-						<div class="star"><div class="star-score" style="width:99.75%;"></div></div>
+						<div class="haoping-score">${product.ratio}%</div>
+						<span class="star"><span class="star-score star-${product.star}"></span></span>
 					</div>					
 					<div class="right">
 						<dl class="clearfix">
@@ -222,55 +231,38 @@
 					
 				<div class="bbs-list">
 					<ul>
-						
+						<c:forEach items="${remarks}" var="remark"> 
 						<li class="bbs-list-item">
-							<div class="bbs-user-photo"><img src="//www.haohua.com/theme/haohua.com/default/static/member/default.jpg" width="57" height="57" /></div>
 							<div class="bbs-con">
 								<div class="bbs-user clearfix">
 									<span class="bbs-user-name">135****2310 </span>
-									<span class="star"><span class="star-score star-5"></span></span>
+									<span class="star"><span class="star-score star-${remark.rank}"></span></span>
 								</div>
 								<div class="bbs-body">
-									<p>花花收到了，又漂亮又新鲜，淡淡的香味，搭配的很别致，送好朋友的，她很喜欢</p>
+									<p>${remark.text}</p>
 								</div>
 								
 								<div class="bbs-img">
 									<ul class="clearfix">
-										
-										<li><img src="//www.haohua.com/upload/comment/201909/03/5d6e02cd_3a52.jpg" jqimg="//www.haohua.com/upload/comment/201909/03/5d6e02cd_3a52.jpg" width="200" /></li>
-										<li><img src="//www.haohua.com/upload/comment/2019-09/03/225be_f739.jpg" jqimg="//www.haohua.com/upload/comment/2019-09/03/225be_f739.jpg" width="200" /></li>
+										<c:if test="${not empty remark.srcs and fn:length(remark.srcs) >0}">
+										<c:forEach items="${remark.srcs}" var="src">
+											<li><img src="/remark/${src}" jqimg="/remark/${src}" style="max-width: 200px;max-height: 200px"  /></li>										
+										</c:forEach></c:if>
 									</ul>
 									<div class="bbs-img-preivew"></div>
 								</div>
 								<div class="bbs-post">
 									<img src="//www.haohua.com/theme/haohua.com/default/static/img/pos.png" style="width:auto;" />
-									<span class="bbs-post-ip">125.46.***.208</span>
-									<span style="color: #b4babf; font-size: 12px;">焦作市 武陟县 山阳区摩登街***</span>
+									<span class="bbs-post-ip">${remark.address}</span>
+									<span style="color: #b4babf; font-size: 12px;">${remark.time}</span>
 								</div>
 							</div>
 							<div class="clear"></div>
 						</li>
-						<li class="bbs-list-item">
-							<div class="bbs-user-photo"><img src="/upload/member/201810/180234a_9c80.gif" width="57" height="57" /></div>
-							<div class="bbs-con">
-								<div class="bbs-user clearfix">
-									<span class="bbs-user-name">147****0680 </span>
-									<span class="star"><span class="star-score star-5"></span></span>
-								</div>
-								<div class="bbs-body">
-									<p>花很好！也很准时，跟图片完全相符，感谢！</p>
-								</div>
-								
-								<div class="bbs-post">
-									<img src="//www.haohua.com/theme/haohua.com/default/static/img/pos.png" style="width:auto;" />
-									<span class="bbs-post-ip">123.163.***.139</span>
-									<span style="color: #b4babf; font-size: 12px;">洛阳市 西工区 西工区春都路1***</span>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</li>								
+						</c:forEach>					
 					</ul>
 				</div>
+				</c:if>
 				</div>
 			
 			</div>
@@ -359,9 +351,23 @@ $(document).ready(function() {
 	});
 	$('#spinner').val("1");
 });
-
+function buyNow(id) {
+	var num=$('#spinner').val()
+	$.ajax({
+		 type: "GET",
+        url: "${pageContext.request.contextPath}/user/cartAdd",
+        data:{"id":id,"num":num},
+        success: function(data){
+        	window.location.href="${pageContext.request.contextPath}/user/intocart"
+        },
+        error: function(XMLHttpRequest,textStatus){
+       	 alert("请求失败"+textStatus)
+ 
+        }
+	 })
+}
 function cartAdd(id) {
-	console.log($('#spinner').val())
+	
 	var num=$('#spinner').val()
 	$.ajax({
 		 type: "GET",

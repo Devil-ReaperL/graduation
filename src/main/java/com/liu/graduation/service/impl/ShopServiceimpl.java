@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import com.liu.graduation.dao.AdminDao;
 import com.liu.graduation.dao.AreaDao;
 import com.liu.graduation.dao.OrderDao;
+import com.liu.graduation.dao.ProductDao;
 import com.liu.graduation.dao.ShopDao;
 import com.liu.graduation.entities.Address;
 import com.liu.graduation.entities.Cart;
@@ -34,11 +35,14 @@ public class ShopServiceimpl implements ShopService{
 
 	@Resource
 	private ShopDao shopDao;
+	
 	@Resource
 	private OrderDao orderDao;
 	
 	@Resource
 	private AreaDao areaDao;
+	@Resource
+	private ProductDao productDao;
 	
 	@Override
 	public int cartAdd(Cart cart) {
@@ -149,18 +153,16 @@ public class ShopServiceimpl implements ShopService{
 	@Override
 	public void findOrderById(String id,Model model) {
 		Order order=orderDao.findOrderByid(id);
-		Order_logistics logistics=orderDao.findOrder_logisticsByid(id);
-		model.addAttribute("time", logistics.getDelivery_time()+" "+logistics.getSegment());
+		
 		model.addAttribute("order", order);
-		model.addAttribute("address", orderDao.findAddressByid(order.getAddress_id()));
-		model.addAttribute("carts", orderDao.findOrder_productByid(id));
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
-	public int updateOrder(String id, String way) {	
-		return orderDao.updateOrder(id, way);
+	public int updateOrder(String id,String status,String way) {
+		productDao.updateProductStock(id);
+		return orderDao.updateOrder(id,status, way);
 	}
 
 	@Override
@@ -174,6 +176,12 @@ public class ShopServiceimpl implements ShopService{
 	public List<Order> findOrder(String user, String status) {
 		// TODO Auto-generated method stub
 		return orderDao.findOrder(user, status);
+	}
+
+	@Override
+	public List<Order_product> remarkProductList(String user, String remark) {
+		
+		return orderDao.remarkProductList(user, remark);
 	}
 	
 			

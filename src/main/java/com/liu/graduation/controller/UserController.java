@@ -46,7 +46,7 @@ public class UserController {
 				return "redirect:/login/index";
 			}
 			else {
-				model.addAttribute("message", "用户名或密码错误");
+				model.addAttribute("error", "用户名或密码错误");
 				return "login";
 			}
 		}

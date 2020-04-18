@@ -17,8 +17,8 @@
 </head>
 <body>
 
-	<jsp:include page="/WEB-INF/jsp/Product/headadmin.jsp" flush="true" ></jsp:include>
-	
+	<jsp:include page="/WEB-INF/jsp/product/headadmin.jsp" flush="true" ></jsp:include>
+	<link href="${pageContext.request.contextPath}/CSS/bootstrap.css" rel="stylesheet">
 	<form id="addproduct"  class="form-inline" role="form"  method="post">
     		<div class="container kv-main" style="width:100%; ">
     		<div class="form-group " style="width: 100%;text-align: center;">

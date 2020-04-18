@@ -428,16 +428,8 @@ $(function(){
     	        error: function () { alert("Error"); }
     	    });
     	})
+    	history.pushState("", "", "${pageContext.request.contextPath}");
     	
-    	$("#btn").click(function() {
-    		console.log(1)
-    		history.pushState("", "", "${pageContext.request.contextPath}/user/intocart/");
-    		//location.replace('${pageContext.request.contextPath}/user/intocart/')
-    		$("#btn").attr("disabled","disabled")
-    		document.getElementById("from1").submit();
-    		return true
-    		
-		})
 });
 function toVaild() {
 	

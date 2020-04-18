@@ -13,13 +13,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/other/panel.css" />
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-2.1.4.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/order/order.js"></script>
-	
+   
 </head>
 <body class="bg">
 
 
-<jsp:include page="/WEB-INF/jsp/head.jsp" flush="true" ></jsp:include>
+<jsp:include page="/WEB-INF/jsp/product/headadmin.jsp" flush="true" ></jsp:include>
 
 <div class="wrap">
 		<div class="wl240 bgfff khzx-menu">
@@ -36,9 +35,9 @@
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse in">
 					<div class="panel-body">
-						<a  class="active" href="javascript:;" onclick="allOrder('${user.phonenum}','${pageContext.request.contextPath}/shop/findorder')">全部订单</a>
-						<a  href="javascript:;" onclick="waitPayment('${user.phonenum}','${pageContext.request.contextPath}/shop/findorder')">&nbsp待付款</a>
-						<a  href="javascript:;" onclick="waitRemark('${user.phonenum}','${pageContext.request.contextPath}/shop/remarkinfo')">&nbsp待评价</a>
+						<a  class="active" href="javascript:;" onclick="allOrder('','${pageContext.request.contextPath}/shop/findorder')">全部订单</a>
+						<a  href="javascript:;" onclick="waitPayment('','${pageContext.request.contextPath}/shop/findorder')">&nbsp待付款</a>
+						<a  href="javascript:;" onclick="waitDelivery('','${pageContext.request.contextPath}/shop/findorder')">&nbsp待发货</a>
 					</div>
 				</div>
 			</div>
@@ -55,7 +54,7 @@
 				<div id="collapseTwo" class="panel-collapse collapse ">
 					<div class="panel-body">
 						<a   href="javascript:;" ">全部订单</a>
-						<a  href="javascript:;" >&nbsp待付款</a>
+						<a  href="javascript:;" >&nbsp待发货</a>
 						<a  href="javascript:;" >&nbsp待评价</a>
 					</div>
 				</div>
@@ -84,10 +83,10 @@
 						<div class="date" style="width: 200px;">${order.addtime}</div>
 						<div class="no">
 							订单号：
-							<a href="${pageContext.request.contextPath}/shop/order/show/id/${order.id}/" class="red">${order.id}</a>
+							<a href="${pageContext.request.contextPath}/admin/order/show/id/${order.id}/" class="red">${order.id}</a>
 						</div>
-						<div class="info">							
-								<span style="color:red;">
+						<div class="info" >							
+								<span style="color:red;" id="${order.id}">
 								<c:if test="${empty  order.status}">待支付</c:if>
 								<c:if test="${order.status ==10}">等待发货</c:if>
 								<c:if test="${order.status ==20}">正在配送</c:if>
@@ -153,16 +152,11 @@
 								<li><label>订单支付金额：</label><b>&yen; ${order.count_price}</b></li>
 							</ul>
 							<div class="but">
-								<c:if test="${empty  order.status}">
-									<p><a href="${pageContext.request.contextPath}/shop/payment/${order.id}" class="block">立即支付</a></p>							
-									
-								</c:if>	
-								<c:if test="${order.status == 10 || order.status == 20}">
-									<p><a href="${pageContext.request.contextPath}/shop/order/cancel/${order.id}" res="ajax">取消订单</a></p>										
+								<c:if test="${order.status ==10}">
+									<p><a href="${pageContext.request.contextPath}/admin/order/deliver/${order.id}" res="prompt" class="block" message="请输入物流号" order="${order.id}">立即发货</a></p>							
 								</c:if>
-								
-								<p><a href="${pageContext.request.contextPath}/shop/order/show/id/${order.id}/">查看订单</a></p>
-						
+											
+								<p><a href="${pageContext.request.contextPath}/admin/order/show/id/${order.id}/">查看订单</a></p>
 
 							</div>
 						</div>
@@ -199,5 +193,6 @@
 	});
 	
 </script>
-
+ <script type="text/javascript" src="${pageContext.request.contextPath}/JS/order/adminorder.js"></script>
+	
 </html>

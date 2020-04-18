@@ -13,13 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.liu.graduation.entities.Product;
 import com.liu.graduation.service.AdminService;
 import com.liu.graduation.service.ProductService;
+import com.liu.graduation.service.ShopService;
 
 @RequestMapping("/admin")
+@SessionAttributes("root")
 @Controller
 public class AdminController {
 	
@@ -29,6 +32,9 @@ public class AdminController {
 	@Resource(name="productService")
 	ProductService productService;
 	
+	@Resource(name="shopService")
+	ShopService shopService;
+	
 	@RequestMapping("/into")
 	public String adminInto()
 	{
@@ -37,17 +43,45 @@ public class AdminController {
 	@RequestMapping("/login")
 	public String loginadmin(@RequestParam("rootId") String name,@RequestParam("password") String password,Model model)
 	{
-		System.out.println(name+"\t"+password);
 		if(adminService.queryAdmin(name, password)==1)
 		{
-			searchAction(model);
-			
-			return "Product/productlist";
+			model.addAttribute("root", "root");
+			searchAction(model);			
+			return "redirect:/admin/search";
 			
 		}
 			
 		else
+		{
+			model.addAttribute("error", "用户名或者密码错误");
 			return "suplogin";
+		}
+			
+	}
+	@RequestMapping("/order")
+	public String orderlist(@RequestParam(value="user",required=false) String user,
+			@RequestParam(value="status",required=false) String status,
+			@RequestParam(value="key",required=false) String key,Model model)
+	{
+		adminService.findAllOrder(user, status, key, model);
+		return "/admin/management";
+	}
+	@ResponseBody
+	@RequestMapping("/order/deliver/{order}")
+	public boolean orderdeliver(@RequestParam(value="id") String id,@PathVariable("order") String order)
+	{
+		System.out.println(order+"*"+id);
+		if (adminService.orderdeliver(order, id)>0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping("/order/show/id/{id}")
+	public String Order_info(@PathVariable("id") String id,Model model)
+	{
+		shopService.findOrderById(id, model);
+		return "/admin/orderinfo";
 	}
 	
 	@RequestMapping("/findlist")
@@ -60,20 +94,11 @@ public class AdminController {
 	public String addProduct(Model model)
 	{
 		model.addAttribute("attrs", productService.findAttrList());
-		return "Product/addProduct";
+		return "product/addProduct";
 	}
 	
-	@RequestMapping("/modify")
-	public String modifyProduct()
-	{
-		return "AdministratorUpdate";
-	}
 	
-	@RequestMapping("/remove")
-	public String removeProduct()
-	{
-		return "AdministratorDelete";
-	}
+	
 	@RequestMapping("/test/{way}")
 	public String test(@PathVariable("way") String way)
 	{
@@ -86,7 +111,7 @@ public class AdminController {
 
 		model.addAttribute("curPage",page);
 		 productService.findProductList(product,model, page);
-		 return "Product/productlist";
+		 return "product/productlist";
 		/*
 		// サービスの実行結果から在庫情報エンティティリストを取得
 		List<GroupOneStockInfoEntity> stockList = (List<GroupOneStockInfoEntity>) serviceResult
@@ -131,7 +156,7 @@ public class AdminController {
 		productService.findProductList(product,model, 1);
 		model.addAttribute("curPage","1");
 		model.addAttribute("key","");
-		return "Product/productlist";
+		return "product/productlist";
 	}
 	
 	

@@ -22,9 +22,41 @@ public class Product {
 	private Date addtime;
 	private Date endtime;
 	private List<String> srcs;
+	private String sales;
+	private String ratio;
+	private String star;
+	private String remark_count;
 	
 	
 	
+	
+	public String getRatio() {
+		return ratio;
+	}
+	public void setRatio(String ratio) {
+		this.ratio = ratio;
+	}
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
+	}
+	public String getRemark_count() {
+		return remark_count;
+	}
+	public void setRemark_count(String remark_count) {
+		this.remark_count = remark_count;
+	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
+	}
+	public void setSrcs(List<String> srcs) {
+		this.srcs = srcs;
+	}
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", stock=" + stock + ", summernote="

@@ -16,6 +16,7 @@ public interface ProductService {
 	public String findProductList(Product product,Model model,int currpage);
 	public int deleteProduct(Product product);
 	public Product findProductByid(String id);
+	public Product findProductInfoByid(String id);
 	public int deleteImg(String id,String src);
 	public int updateProduct(Product product);
 	public Map<String,Object> findProductList(String find,int currpage);

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.liu.graduation.dao.AttrDao;
 import com.liu.graduation.dao.ProductDao;
+import com.liu.graduation.dao.RemarkDao;
 import com.liu.graduation.entities.AttrBeen;
 import com.liu.graduation.entities.Product;
 import com.liu.graduation.entities.support.Pagination;
@@ -38,6 +39,9 @@ public class ProductServiceimpl implements ProductService{
 	
 	@Resource
 	private ProductDao productDao;
+	
+	@Resource
+	private RemarkDao remarkDao;
 	
 	@Override
 	public boolean addproduct(Product product)  {
@@ -186,6 +190,11 @@ public class ProductServiceimpl implements ProductService{
 		return productDao.selectProductById(id);
 	}
 	@Override
+	public Product findProductInfoByid(String id) {
+		// TODO Auto-generated method stub
+		return productDao.findProductById(id);
+	}
+	@Override
 	public int deleteImg(String id, String src) {
 		// TODO Auto-generated method stub
 		return productDao.deleteImg(id, src);
@@ -256,7 +265,8 @@ public class ProductServiceimpl implements ProductService{
 	}
 	@Override
 	public void productinfo(String id, Model model) {
-		
+		model.addAttribute("sales", productDao.queryProductBySales(10));
+		model.addAttribute("remarks", remarkDao.queryRemarkById(id));
 		model.addAttribute("product", productDao.selectProductById(id));
 	}
 	

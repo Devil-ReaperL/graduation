@@ -84,6 +84,7 @@
         overwriteInitial: false,
         uploadAsync: false,
         showCancel:false,
+        dropZoneEnabled: false,
         showUpload:false,
         browseOnZoneClick: true,
         maxFileSize: 1024*10242*2,
@@ -96,8 +97,8 @@
         '    {drag}\n' +
         '    <div class="clearfix"></div>\n' +
         '</div>',
-            actionUpload:'',//去除上传预览缩略图中的上传图片；
-           
+            actionUpload:''//去除上传预览缩略图中的上传图片；
+       
         }, 
         slugCallback: function(filename) {
             return filename.replace('(', '_').replace(']', '_');

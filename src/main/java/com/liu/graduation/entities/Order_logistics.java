@@ -52,7 +52,7 @@ public class Order_logistics {
 		this.courier_id = courier_id;
 	}
 	public String getDelivery_time() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if(delivery_time!=null)
 		return sdf.format(delivery_time);
 		else

@@ -9,6 +9,7 @@ import com.liu.graduation.entities.Cart;
 import com.liu.graduation.entities.Cart_info;
 import com.liu.graduation.entities.Order;
 import com.liu.graduation.entities.Order_info;
+import com.liu.graduation.entities.Order_product;
 import com.liu.graduation.entities.Product;
 
 public interface ShopService {
@@ -24,7 +25,9 @@ public interface ShopService {
 	public String creatOrder(Order_info info,Model model);
 	public void findOrderById(String id,Model model);
 	public void findAllOrderByStatus(String user,String status,Model model);
-	public int updateOrder(String id,String way);
+
+	public int updateOrder(String id,String status,String way);
 	public List<Order> findOrder(String user,String status);
+	public List<Order_product> remarkProductList(String user,String remark);
 
 }

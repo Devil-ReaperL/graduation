@@ -118,9 +118,7 @@
     </trim>
   </insert>
   
-  <insert id="insertOrder_product" parameterType="com.liu.graduation.entities.Order_product" >
-    
-		   
+  <insert id="insertOrder_product" parameterType="com.liu.graduation.entities.Order_product">		   
 		INSERT INTO order_product
 		 (order_id,product_id,product_name,product_src,num,price)
 		SELECT #{order_id,jdbcType=VARCHAR},product_id,product.name,SUBSTRING_INDEX(product.src,';',1),num,price
@@ -183,8 +181,8 @@
     </trim>
     
   </insert>
-    <select id="findOrderByid" resultType="com.liu.graduation.entities.Order" >
-        select * from `Order`
+    <select id="findOrderByid" resultMap="orderResultMap" >
+        select * from `order_info`
         WHERE id=#{id,jdbcType=VARCHAR}
     </select>
     <select id="findAddressByid" resultType="com.liu.graduation.entities.Address" >
@@ -200,8 +198,15 @@
         WHERE order_id=#{id,jdbcType=VARCHAR}
     </select>
     <update id="updateOrder">
-    	update `Order`
-    	set status='10',payment=#{way,jdbcType=VARCHAR}
+    	update `Order` 
+    	<set>
+    		<if test="status != null and status !=''" >
+		      	status=#{status},
+		    </if>
+		    <if test="way != null and way !=''" >
+		      	payment=#{way}
+		    </if>
+    	</set>	
     	where id=#{id,jdbcType=VARCHAR}
     </update>
     <select id="findOrderByUser" resultMap="orderResultMap">
@@ -213,13 +218,55 @@
     <select id="findOrder" resultMap="orderResultMap">
     	SELECT *
 		FROM `order_info` 
-        WHERE phonenum=#{user,jdbcType=VARCHAR}
+        WHERE 1
+         <if test="user != null and user !=''" >
+        AND phonenum=#{user,jdbcType=VARCHAR}
+        </if>
         <if test="status != null and status !=''" >
-      	and status={status,jdbcType=VARCHAR}
+      	and status=#{status}
       </if> 
       <if test="status ==''" >
       	and status is null
       </if>
         order by addtime desc
-    </select>    
+    </select> 
+    <select id="findAllOrder" resultMap="orderResultMap">
+    	SELECT *
+		FROM `order_info` 
+		where 1 
+		<if test="status != null and status !=''" >
+      	and status=#{status,jdbcType=VARCHAR}
+      	</if>
+      	<if test="user != null and status !=''" >
+      	and phonenum=#{user,jdbcType=VARCHAR}
+      	</if>
+      	<if test="key != null and status !=''" >
+      	and (id like CONCAT('%', #{key},'%') 
+      			or phonenum like CONCAT('%', #{key},'%') 
+      			or phone like CONCAT('%', #{key},'%')
+      			or product_name like CONCAT('%', #{key},'%'))
+      	</if>
+      	order by addtime desc
+    </select> 
+    <update id="updateOrder_logistics">
+    	update order_logistics t1,`order` t2
+    	set courier_id=#{id},t2.`status`='20'		
+		WHERE  t1.order_id=t2.id AND t2.id=#{order}
+    </update>
+    <select id="remarkProductList" resultType="com.liu.graduation.entities.Order_product">
+    	SELECT *
+		FROM `order` t1 JOIN order_product t2 ON t1.id=t2.order_id 
+		 AND t1.phonenum=#{user,jdbcType=VARCHAR}
+		 <if test="remark == null or remark ==''">
+		 AND t2.remark IS NULL
+		 </if>
+		 <if test="remark != null and remark != '' ">
+		 where t2.remark=#{remark,jdbcType=VARCHAR}
+		 </if>
+    </select>  
+    <update id="updateOrder_productRemark">
+    	update Order_product
+    	set remark = #{remark,jdbcType=VARCHAR}
+    	where order_id=#{order,jdbcType=VARCHAR}
+    </update>
 </mapper>

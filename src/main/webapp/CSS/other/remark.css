@@ -1,0 +1,175 @@
+.starts{			
+	
+ }
+ .starts ul{
+ 	float:left;
+ 	margin-top: 8px;
+ }
+ .starts ul li{
+ 	list-style: none;
+ 	width:32px;
+ 	height:21px;
+ 	float:left;
+ 	background:url(../../img/stark2.png) no-repeat;
+ 	
+ }
+ .starts ul li.on{
+ 	background:url(../../img/stars2.png) no-repeat;
+ }
+ .starts ul span{
+ 	display:inline;
+ 	float:left;
+ 	padding-left:10px;
+ 	height:21px;
+ 	line-height:21px;
+ }
+ .upload{
+ 	background:url(../../img/camera.png)  no-repeat 0 top;
+    cursor: pointer;
+ 	width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+ }
+ .productinfo{
+ 	border-top: 1px solid #e4e4e4;
+    margin-top: -1px;
+    margin-bottom: 1px;
+    overflow: hidden;
+    background: #fff;
+    font-family: verdana,'5b8b/4f53;';
+ }
+ #container{
+ background-color: #f5f5f5;
+ margin: 0;
+    padding: 0;
+ }
+ .o-title{
+ 	font: 550 16px/26px "Microsoft YaHei";
+    color: #333;
+    text-align: center;
+ }
+ .o-info{
+ 	font: 12px/22px verdana;
+    color: #999;
+        width: 100%;
+    text-align: center;
+ }
+ .orderinfo{
+ 	padding: 15px 0;
+ }
+ .mr20 {
+    margin-right: 20px;
+    font: 12px/22px verdana;
+    color: #999;
+}
+.gray1 {
+    color: #333;
+}
+ .fi-info {
+    float: left;
+    width: 322px;
+    _display: inline;
+}
+.comment-goods {
+    padding: 55px 50px;
+}
+.comment-goods .p-img {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.comment-goods .p-name, .comment-goods .p-price {
+    width: 100%;
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.comment-goods .p-name, .comment-goods .p-price {
+    width: 100%;
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.comment-goods .p-attr {
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+    color: #999;
+}
+ .f-btnbox {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding: 30px 0;
+    text-align: center;
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+ .btn-submit {
+    width: 220px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    background-image: linear-gradient(to bottom,#df3033 0,#e74649 100%);
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #df3033;
+}
+ .fi-operate {
+    overflow: hidden;
+    zoom: 1;
+    border-left: 1px solid #f5f5f5;
+    padding: 30px 40px 0;
+    padding-bottom: 4000px;
+    margin-bottom: -4000px;
+    position: relative;
+    z-index: 1;
+}
+.fop-label {
+    float: left;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 20px;
+    _display: inline;
+    overflow: hidden;
+}
+.fop-main {
+    
+    zoom: 1;
+    margin-right: 40px;
+}
+.f-textarea {
+    padding: 10px 10px 0;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.fop-item {
+    float: left;
+    width: 100%;
+    padding-bottom: 25px;
+}
+.fop-item .f-textarea textarea {
+        width: 100%;
+    height: 54px;
+    max-width: 100%;
+    max-height: 54px;
+    min-height: 54px;
+    line-height: 18px;
+    border: medium none;
+    color: #333;
+    resize: vertical;
+    resize: none;
+    font-size: 14px;
+    border: solid 0px;
+outline:none;
+}

@@ -34,10 +34,6 @@ function sd_load(sd_width) {
 	if(sd_left < 0) {
 		sd_left = 0;
 	}
-	console.log("1+"+$("#SD_window").height())
-	console.log("$(window).height() "+$(window).height())
-	console.log("$(document).scrollTop()"+$(document).scrollTop())
-	console.log(sd_top+","+sd_left)
 	$("#SD_window").css("top", sd_top);
 	$("#SD_window").css("left", sd_left);
 }
@@ -52,7 +48,7 @@ function sd_remove() {
 
 function showDialog(mode, msg, t, sd_width) {
 	var sd_width = sd_width ? sd_width : 400;
-	var mode = in_array(mode, ['confirm', 'window', 'info', 'loading']) ? mode : 'alert';
+	var mode = in_array(mode, ['confirm', 'window', 'info', 'loading','prompt']) ? mode : 'alert';
 	var t = t ? t : "提示信息";
 	var msg = msg ? msg : "";
 	var confirmtxt = confirmtxt ? confirmtxt : "确定";
@@ -89,7 +85,12 @@ function showDialog(mode, msg, t, sd_width) {
 		SD_html += "<tr><td class='SD_bg'></td>";
 		SD_html += "<td id='SD_container'>";
 		SD_html += "<h3 id='SD_title'>" + t + "</h3>";
+		if(mode == "prompt")
+		{
+			msg=msg+'  <input type="text" id="prompt" style="width: 70%;margin-left: 10px;" oninput = "value=value.replace(/[^\\d]/g,\'\')" >'
+		}
 		SD_html += "<div id='SD_body'><div id='SD_content'>" + msg + "</div></div>";
+		
 		SD_html += "<div id='SD_button'><div class='SD_button'>";
 		SD_html += "<a id='SD_confirm'>" + confirmtxt + "</a>";
 		SD_html += "<a id='SD_cancel'>" + canceltxt + "</a>";
@@ -109,7 +110,7 @@ function showDialog(mode, msg, t, sd_width) {
 		if(mode == "window") {
 			$("#SD_close").show();
 		}
-		if(mode == "confirm") {
+		if(mode == "confirm" || mode == "prompt") {
 			$("#SD_button").show();
 		}
 		var sd_move = false;
@@ -124,9 +125,7 @@ function showDialog(mode, msg, t, sd_width) {
 				
 				var x = e.pageX - sd_x;
 				var y = e.pageY - sd_y;
-				console.log(x+","+y)
-				console.log(e.pageX +","+e.pageY)
-				console.log(sd_x+","+sd_y)
+
 				$("#SD_window").css({left:x, top:y});
 			}
 		}).mouseup(function(){
@@ -144,6 +143,7 @@ function showDialog(mode, msg, t, sd_width) {
 function showInfo(msg, fn, timeout) {
 	showDialog("info", msg);
 	$("#SD_confirm").unbind("click");
+	var st=""
 	if(fn && timeout) {
 		st = setTimeout(function(){
 			sd_remove();
@@ -188,6 +188,15 @@ function showConfirm(msg, fn) {
 	$("#SD_confirm").bind("click", function(){
 		if(fn) {
 			fn();
+		}
+	});
+}
+function showPrompt(msg, fn) {
+	showDialog("prompt", msg);
+	$("#SD_confirm").unbind("click");
+	$("#SD_confirm").bind("click", function(){
+		if(fn) {
+			fn($("#prompt").val());
 		}
 	});
 }

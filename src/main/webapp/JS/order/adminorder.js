@@ -15,22 +15,21 @@ function allOrder(id,url) {
 	 })
 	 return false;
 }
-function waitRemark(id,url) {
+function waitDelivery(id,url) {
 	$.ajax({
 		 type: "post",
-      url: url,
-      data:{"user":id,
-    	  	"remark":''
-   	   },
-      success: function(data){
-   	   
-   	   remarkFormat(data)
-     		$('html,body').animate({scrollTop: '0px'}, 800);
-      },
-      error: function(XMLHttpRequest,textStatus){
-     	 alert("请求失败")
+     url: url,
+     data:{"user":id,
+    	   "status":"10"
+  	   },
+     success: function(data){
+   	  orderFormat(data)
+    		$('html,body').animate({scrollTop: '0px'}, 800);
+     },
+     error: function(XMLHttpRequest,textStatus){
+    	 alert("请求失败")
 
-      }
+     }
 	 })
 	 return false;
 }
@@ -42,7 +41,7 @@ function waitPayment(id,url) {
     	   	 "status":''
     	   },
        success: function(data){
-    	   console.log(data)
+    	   
     	   orderFormat(data)
       		$('html,body').animate({scrollTop: '0px'}, 800);
        },
@@ -75,74 +74,20 @@ function statusTran(status) {
 		return "交易完成"
 	}
 }
-function remarkFormat(data) {
-	$("#orderlist").empty();
-   	var html=""
-		if(data.length != 0)
-			{   	
-		   		for ( var i in data) {
-		   			html=html+'<div class="my-order-list" >'+
-		   			'<div class="my-order-list-head clearfix">'+
-					'<div class="date" style="width: 200px;">'+data[i].addtime+'</div>'+
-					'<div class="no">订单号：<a href="'+$("#PageContext").val()+'/shop/order/show/id/'+data[i].order_id+'" class="red"> '+data[i].order_id+'</a>'+
-					'</div>'+
-				'</div>'+
-				'<div class="my-order-list-body clearfix">'+
-					'<div class="my-order-list-item">'			
-					html=html+'<div class="my-order-list-goods clearfix">'+					
-					'<div class="img">'+
-						'<a href="'+$("#PageContext").val()+'/product/info/'+data[i].product_id+'">'+
-							'<img src="/image/'+data[i].product_src+'" width="60" height="60" />'+
-						'</a>'+
-					'</div>'+
-					'<div class="name">'+
-						'<h3><a href="'+$("#PageContext").val()+'/product/info/'+data[i].product_id+'" target="_blank">'+data[i].product_name+'</a></h3>'+
-						'<ul class="clearfix">'+
-							
-						'</ul>'+
-					'</div>'+
-					'<div class="price">'+						
-						'<p><b>&yen;'+data[i].price+'</b></p>'+
-					'</div>'+
-					'<div class="num">'+data[i].num+'</div>'+
-					'<div class="coupon">'+				
-					'</div>'+
-					'<div class="note"><p></p></div>'+
-				'</div></div>'
-				
-		   			html=html+						
-					'<div class="my-order-list-action">'+
-						'<div class="but" style="padding-top: 0px;border-top: 0px">'						
-						html=html+				
-							'<p><a href="'+$("#PageContext").val()+'/shop/remark/id/'+data[i].order_id+'/'+data[i].product_id+'" style="font-size: 14px;">评价</a></p>'+
-						'</div>'+
-					'</div>'+
-					'</div>'+
-				'</div>'			
-				}
-			}
-		else{
-			
-			console.log("null")
-			html=html+
-			'<div class="error-box">'+
-			'<div class="error-box box-info">对不起，没有需要评价的商品！</div>'+
-		'</div>'
-		}
-   	console.log(html)
-	$("#orderlist").html(html)
-}
-
 function orderFormat(data){
+	console.log("1")
 	$("#orderlist").empty();
    	var html=""
 		if(data.length != 0)
-			{   	
+			{
+				console.log("2")
+			   	
 		   		for ( var i in data) {
+		   			
 		   			html=html+'<div class="my-order-list" >'+
 		   			'<div class="my-order-list-head clearfix">'+
 					'<div class="date" style="width: 200px;">'+data[i].addtime+'</div>'+
-					'<div class="no">订单号：<a href="'+$("#PageContext").val()+'/shop/order/show/id/'+data[i].id+'" class="red"> '+data[i].id+'</a>'+
+					'<div class="no">订单号：<a href="'+$("#PageContext").val()+'/admin/order/show/id/'+data[i].id+'" class="red"> '+data[i].id+'</a>'+
 					'</div>'+
 					'<div class="info">	'+						
 							'<span style="color:red;">'+
@@ -201,15 +146,12 @@ function orderFormat(data){
 							'<li><label>订单支付金额：</label><b>&yen; '+data[i].count_price+'</b></li>'+
 						'</ul>'+
 						'<div class="but">'
-						if(data[i].status == null)			
+						if(data[i].status == 10)			
 							{
-								html=html+'<p><a href="'+$("#PageContext").val()+'/shop/payment/'+data[i].id+'" class="block">立即支付</a></p>'
+							console.log(data[i].status == 10)
+								html=html+'<p><a href="'+$("#PageContext").val()+'/admin/order/deliver/'+data[i].id+'" res="prompt" class="block" message="请输入物流号" order="'+data[i].id+'">立即发货</a></p>'
 							}
-		   				if(data[i].status == 10 ||data[i].status == 20)
-		   					{
-		   						html=html+'	<p><a href="'+$("#PageContext").val()+'/shop/order/cancel/id/'+data[i].id+'" res="confirm">取消订单</a></p>'			
-		   					}
-		   					html=html+'<p><a href="'+$("#PageContext").val()+'/shop/order/show/id/'+data[i].id+'">查看订单</a></p>'+
+						html=html+'<p><a href="'+$("#PageContext").val()+'/admin/order/show/id/'+data[i].id+'">查看订单</a></p>'+
 						'</div>'+
 					'</div>'+
 					'</div>'+
@@ -224,6 +166,35 @@ function orderFormat(data){
 			'<div class="error-box box-info">对不起，当前没有任何订单！</div>'+
 		'</div>'
 		}
-
 	$("#orderlist").html(html)
+	$('a[res=prompt]').click(function(){
+		var url = $(this).data('url') ? $(this).data('url') : $(this).attr('href');
+		var width = $(this).data('width') ? $(this).data('width') : 500;
+		var title = $(this).attr('message') ? $(this).attr('message') : $(this).text();
+		var order='#'+$(this).attr('order')
+		var btn=$(this)
+		showPrompt(title , function(id){
+			$.ajax({
+				 type: "post",
+			      url: url,
+			      data:{"id":id
+			   	   },
+			   	 async: false,	
+			      success: function(data){
+			    	  if(data)
+			    		  {
+			    		  showInfo("成功发货","",3)
+			    		  $(order).text("正在配送")
+			    		  $(btn).remove()
+			    		  }
+			      },
+			      error: function(XMLHttpRequest,textStatus){
+			    	  showDialog("alert", "读取数据失败");
+	
+			      }
+				 })
+		});
+		
+		return false;
+	});
 }

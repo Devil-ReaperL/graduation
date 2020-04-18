@@ -27,14 +27,14 @@
 				</ul>
 				<div class="h20"></div>
 				<ul class="clearfix">
-					<li style="float: left;margin-left: 175px"><label>收货人：</label>${address.phonenum}</li>
+					<li style="float: left;margin-left: 175px"><label>收货人：</label>${order.address.phonenum}</li>
 				</ul>
 				<div class="h20"></div>
 				<ul class="clearfix">
 					<li style="float: left;margin-left: 175px"><label>收货地址：
-					</label>${address.province} - ${address.city}- ${address.county} - ${address.details}</li>
+					</label>${order.address.province} - ${order.address.city}- ${order.address.county} - ${order.address.details}</li>
 				</ul>
-				<p class="mt10" style="line-height:25px;margin-left: 175px">送达时间：${time}<br />
+				<p class="mt10" style="line-height:25px;margin-left: 175px">送达时间：${order.order_logistics.delivery_time} ${order.order_logistics.segment}<br />
 					
 					留言信息：${order.message}<br />
 					</p>
@@ -44,7 +44,7 @@
 			<div class="cart-order">
 				<div class="cart-label">商品列表</div>
 				<div class="cart-body">		
-				<c:forEach items="${carts}" var="cart">			
+				<c:forEach items="${order.pList}" var="cart">			
 					<ul class="order-list-item clearfix">
 						<li class="img">
 							<a href="${pageContext.request.contextPath}/product/info/${cart.product_id}" target="_blank">
