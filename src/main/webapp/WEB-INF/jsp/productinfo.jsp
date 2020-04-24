@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<!DOCTYPE html>
 <html>
 <head>
     <title>鲜花速递网站-好花网!网上订鲜花,百株好花只取一朵精华</title>
@@ -138,7 +139,7 @@
 					<ul>
 						<c:forEach items="${sales}" var="sale">																
 						<li>
-							<a class="imgbounce" href="/xianhua/46431.html" title="商品">
+							<a class="imgbounce" href="${pageContext.request.contextPath}/product/info/${sale.id}" title="商品">
 								<div class="img"><img src="/image/${sale.srcs[0]}" width="84" height="84" /></div>
 								<div class="txt">
 									<h5>${sale.name}</h5>
@@ -147,18 +148,7 @@
 								<div class="clear"></div>
 							</a>
 						</li>
-						</c:forEach>
-						<li>
-							<a class="imgbounce" href="/xianhua/46064.html" title="商品">
-								<div class="img"><img src="//www.haohua.com/upload/image/2019-06/13/19869_ef1a.jpg" width="84" height="84" /></div>
-								<div class="txt">
-									<h5>Full love浓情鲜花系列99枝黑纱红玫瑰+尤加利叶满天星</h5>
-									<div class="price b"><span>¥</span>628.00<label>人气667</label></div>
-								</div>
-								<div class="clear"></div>
-							</a>
-						</li>
-						
+						</c:forEach>					
 					</ul>
 				</div>
 			</div>
@@ -374,8 +364,7 @@ function cartAdd(id) {
         url: "${pageContext.request.contextPath}/user/cartAdd",
         data:{"id":id,"num":num},
         success: function(data){
-       		console.log(data)
-       		alert(data)
+        	showInfo(data,"",3)      		
         },
         error: function(XMLHttpRequest,textStatus){
        	 alert("请求失败"+textStatus)

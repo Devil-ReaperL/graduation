@@ -61,7 +61,11 @@
       </if>
     </trim>
   </insert>
-  
+  <select id="checkProductById" resultType="int">
+  		select count(*)
+  		from product
+  		where id=#{id} and endtime is null
+  </select>
   <select id="selectProductById" resultMap="BaseResultMap" parameterType="java.lang.String">
         select * from product_info
         where id=#{id}
@@ -191,5 +195,39 @@
 		from product 
 		order BY sales desc
 		limit #{num,jdbcType=INTEGER}
+	</select>
+	<select id="countProductByFrom" resultType="int">
+		select 
+	      count(p.id) 
+	    from
+	    product p join attr a ON p.attr=a.id
+	    where p.endtime is null and stock>0
+	     <if test="key != null and key != ''">
+	    	and (  p.name like CONCAT('%', #{key},'%')
+	    		or p.summernote like CONCAT('%', #{key},'%'))
+	    </if>
+	    <if test="attr != null and attr != ''">
+	    	and a.name like CONCAT('%', #{attr},'%')
+	    </if>
+	</select>
+	<select id="queryProductByFrom" resultType="com.liu.graduation.entities.Product">
+		select 
+	      p.id,p.name,p.price,p.src,p.stock,a.name AS attr,p.sales
+	    from
+	    product p join attr a ON p.attr=a.id
+	    where p.endtime is null and stock>0
+	    <if test="key != null and key != ''">
+	    	and (  p.name like CONCAT('%', #{key},'%')
+	    		or p.summernote like CONCAT('%', #{key},'%'))
+	    </if>
+	    <if test="attr != null and attr != ''">
+	    	and a.name like CONCAT('%', #{attr},'%')
+	    </if>
+	    <if test="sort != null and sort != ''">
+	    	order by  ${sort} 
+	    	<if test="order =='desc'">
+	    	desc
+	    </if>
+	    </if>
 	</select>
 </mapper>

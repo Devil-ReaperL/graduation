@@ -13,6 +13,29 @@
 	    <result column="questionid" property="questionid" jdbcType="VARCHAR" />
   	</resultMap>
   	
+  	<insert id="insertUser">
+  	 insert into `user`
+     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="phonenum != null" >phonenum,</if>
+      <if test="password != null" >password,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update
+     password=#{password,jdbcType=VARCHAR}
+  	</insert>
+  	<update id="updateUser">
+  		UPDATE `user`
+		SET password= #{password,jdbcType=VARCHAR}
+		WHERE phonenum = #{phonenum,jdbcType=VARCHAR}
+  	</update>
+  	
     <select id="findUserByinfo" resultType="com.liu.graduation.entities.UserBeen">
         select * from user
         where 

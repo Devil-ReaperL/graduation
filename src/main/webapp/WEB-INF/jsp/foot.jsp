@@ -89,7 +89,7 @@
 			<div class="fqrcode">
 				<p class="note">回复“礼物”有惊喜！" 活动多多，在BTS遇见幸福</p>
 				<p class="img"><img src="${pageContext.request.contextPath}/img/wx.jpg" width="128" height="130" /></p>
-				<p class="gzh">公众号</p>
+				<p class="gzh">微信号</p>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -114,33 +114,36 @@
 	<ul>
 		<li class="rside-btn rotate">
 			
-<a href="#top" class="back-to-top"> Back to top </a>
+			<a href="#top" class="back-to-top">
+			<i class="icon-rside icon-top"></i>
+			<span>Back to top</span>
+			</a>
 		</li>
 		<li class="rside-btn rotate">
-			<a href="javascript:;" onclick="openChat();" title="生日送花">
+			<a href="${pageContext.request.contextPath}/product/search?attr=礼盒" title="生日送花">
 				<i class="icon-rside icon-birth"></i>
 				<span>生日送花</span>
 			</a>
 		</li>
 		<li class="rside-btn rotate">
-			<a href="javascript:;" onclick="openChat();" title="爱情鲜花">
+			<a href="${pageContext.request.contextPath}/product/search?attr=纯爱" title="爱情鲜花">
 				<i class="icon-rside icon-love"></i>
 				<span>爱情鲜花</span>
 			</a>
 		</li>
 		<li class="rside-btn rotate">
-			<a href="javascript:;" onclick="openChat();" title="商务定制">
+			<a href="${pageContext.request.contextPath}/product/search?attr=商务" title="商务定制">
 				<i class="icon-rside icon-business"></i>
 				<span>商务定制</span>
 			</a>
 		</li>
 		<li class="rside-qrcode">
 			<div class="fqrcode tc">
-				<p class="gzh">关注我们</p>
-				<p class="gzh">领优惠券</p>
+				<p class="gzh">请关注我</p>
+				<p class="gzh">领取爱情</p>
 			</div>
 			<div class="bqrcode">
-				<img src="//www.haohua.com/theme/haohua.com/default/static/img/qrcode.png" width="74" height="74">
+				<img src="${pageContext.request.contextPath}/img/wx.jpg" width="74" height="74">
 			</div>
 		</li>
 	</ul>
@@ -165,8 +168,7 @@ $(document).ready(function() {
 	var id=requestParam('message');
 
 	if(id !=null){
-		
-		alert(id)
+		showInfo(id,"",3) 
 	
 	}
 		

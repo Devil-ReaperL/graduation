@@ -11,7 +11,7 @@
 	
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-2.1.4.js"></script>
 	 <script src="${pageContext.request.contextPath}/JS/jquery.js"></script>
-   
+   	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.showDialog.js"></script>   
     <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
   
    

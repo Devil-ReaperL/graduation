@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>鲜花速递网站-好花网!网上订鲜花,百株好花只取一朵精华</title>
@@ -19,13 +20,13 @@
 	
 <div class="full-slider">
     <div class="banner">
-        <a class="item" >
+        <a class="item" href="${pageContext.request.contextPath}/">
             <div class="img" style="background-image: url(${pageContext.request.contextPath}/img/lb1.jpg);" data-lazy="${pageContext.request.contextPath}/img/lb1.jpg"></div>
         </a>
         <a class="item" >
             <div class="img" style="background-image: url(${pageContext.request.contextPath}/img/lb2.jpg);" data-lazy="${pageContext.request.contextPath}/img/lb2.jpg"></div>
         </a>
-        <a class="item">
+        <a class="item" href="${pageContext.request.contextPath}/product/search?attr=纯爱">
             <div class="img" style="background-image: url(${pageContext.request.contextPath}/img/lb3.jpg);" data-lazy="${pageContext.request.contextPath}/img/lb3.jpg"></div>
         </a>
     </div>
@@ -50,7 +51,7 @@
             <div class="h50"></div>
             <c:forEach items="${attrs}" var="attr">
              <c:if test="${attr.id eq aa.key}">
-            <div class="ibbar" >
+            <div class="ibbar" id="attr${attr.id}" name="attr${attr.id}">
                 <h3><strong><font size="5">${attr.name}</font></strong> <span>${attr.describe}</span></h3>
                     
 
@@ -58,7 +59,7 @@
 
             <div class="ibcon clearfix">
                 <div class="left ib201">
-                <a class="info" href="#">
+                <a class="info" href="${pageContext.request.contextPath}/product/search?attr=${attr.name}">
                     <div class="img"><img src="${pageContext.request.contextPath}/${attr.path}" height="412" /></div>
                     <h5>${attr.name}专区</h5>
                     <p>进入专区</p>

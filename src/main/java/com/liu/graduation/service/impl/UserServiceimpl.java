@@ -123,4 +123,16 @@ public class UserServiceimpl implements  UserService{
 		return dir+"-Remarkimg\\";
 	}
 
+	@Override
+	public int insertUser(UserBeen user) {
+		// TODO Auto-generated method stub
+		return userDao.insertUser(user);
+	}
+
+	@Override
+	public int updateUser(UserBeen user) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(user);
+	}
+
 }

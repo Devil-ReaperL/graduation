@@ -75,13 +75,10 @@ function statusTran(status) {
 	}
 }
 function orderFormat(data){
-	console.log("1")
 	$("#orderlist").empty();
    	var html=""
 		if(data.length != 0)
 			{
-				console.log("2")
-			   	
 		   		for ( var i in data) {
 		   			
 		   			html=html+'<div class="my-order-list" >'+
@@ -148,7 +145,6 @@ function orderFormat(data){
 						'<div class="but">'
 						if(data[i].status == 10)			
 							{
-							console.log(data[i].status == 10)
 								html=html+'<p><a href="'+$("#PageContext").val()+'/admin/order/deliver/'+data[i].id+'" res="prompt" class="block" message="请输入物流号" order="'+data[i].id+'">立即发货</a></p>'
 							}
 						html=html+'<p><a href="'+$("#PageContext").val()+'/admin/order/show/id/'+data[i].id+'">查看订单</a></p>'+
@@ -159,8 +155,6 @@ function orderFormat(data){
 				}
 			}
 		else{
-			
-			console.log("null")
 			html=html+
 			'<div class="error-box">'+
 			'<div class="error-box box-info">对不起，当前没有任何订单！</div>'+

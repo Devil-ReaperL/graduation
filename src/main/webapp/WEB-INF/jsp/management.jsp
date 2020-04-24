@@ -175,6 +175,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<jsp:include page="/WEB-INF/jsp/foot.jsp" flush="true" ></jsp:include>
 	<input id="PageContext" hidden="hidden" value="${pageContext.request.contextPath}" >
 </body>
 

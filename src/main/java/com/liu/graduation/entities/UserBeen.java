@@ -5,15 +5,8 @@ public class UserBeen {
 	private String phonenum;
 	private String password;
 	private String name;
-	private String address;
-	private String questionid;
-	
-	
-	@Override
-	public String toString() {
-		return "UserBeen [phonenum=" + phonenum + ", password=" + password + ", name=" + name + ", address=" + address
-				+ ", questionid=" + questionid + "]";
-	}
+	private String answer;
+	private String question;
 	public String getPhonenum() {
 		return phonenum;
 	}
@@ -32,20 +25,25 @@ public class UserBeen {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
-		return address;
+	public String getAnswer() {
+		return answer;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
-	public String getQuestionid() {
-		return questionid;
+	public String getQuestion() {
+		return question;
 	}
-	public void setQuestionid(String questionid) {
-		this.questionid = questionid;
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	@Override
+	public String toString() {
+		return "UserBeen [phonenum=" + phonenum + ", password=" + password + ", name=" + name + ", answer=" + answer
+				+ ", question=" + question + "]";
 	}
 	
 	
-	
+			
 	
 }

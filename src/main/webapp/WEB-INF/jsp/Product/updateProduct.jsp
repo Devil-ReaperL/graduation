@@ -63,7 +63,7 @@
 				<label for="spinner1" class="addlable">商品价格：</label>
 
 			  	<input name="price" type="text" id="spinner1" class="spinner form-control" maxlength="10" value="5"  style="width: 100px;
-    		text-align: -webkit-center;font-size: 20px;" datestyle="float"/>
+    		text-align: -webkit-center;font-size: 20px;border-radius: 0px;" datestyle="float"/>
 			  	
 
 			</div>
@@ -72,7 +72,7 @@
 
 			  	<input name="stock" type="text" id="spinner" class="spinner form-control" maxlength="10" value="5"  
 			  			style="width: 100px;font-size:20px;
-    					text-align: -webkit-center;" datestyle="int" />
+    					text-align: -webkit-center;border-radius: 0px;" datestyle="int" />
 			  	
 
 			</div>
@@ -80,13 +80,32 @@
 			</div>
     		              
             <div class="container kv-main" style="width: 52%">
+            <style TYPE="text/css">
+                 	.btn{
+                 		    font-weight: normal;
+						    text-align: center;
+						    white-space: nowrap;
+						    height: auto;
+                 	}
+                 	.form-control {
+                 			font-size: 16px;
+							line-height: 1.42857143;
+							color: #555555;
+							background-color: #fff;
+							background-image: none;
+							border: 1px solid #ccc;
+							border-radius: 4px;
+							padding: 0px;
+							}
+							
+                 </style>
                  <div class="form-group">
                 	  <label for="uploadImg" class="addlable">展示照片：</label>
                       <input name="files" id="uploadImg" type="file" multiple class="file " style="font-size: 16px;" data-overwrite-initial="false" data-min-file-count="1">
                   </div>                       
             </div>
             
-            <div style="width: 50%;margin:20px auto" >
+            <div style="width: 52%;margin:20px auto" >
             	<label for="summernote" class="addlable">详细信息：</label>
    			 	<textarea id="summernote" name="summernote" ></textarea>
    			 	

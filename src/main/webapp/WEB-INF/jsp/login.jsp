@@ -26,8 +26,8 @@
 					<div class="topperpop">
 						<div class="fqrcode">
 							<p class="note">回复“礼物”有惊喜！" 活动多多，在BTS遇见幸福</p>
-							<p class="img"><img src="//www.haohua.com/theme/haohua.com/default/static/img/qrcode.png" width="128" height="130" /></p>
-							<p class="gzh">公众号</p>
+							<p class="img"><img src="${pageContext.request.contextPath}/img/wx.jpg" width="128" height="130" /></p>
+							<p class="gzh">微信号</p>
 						</div>
 					</div>
 				</a>
@@ -84,7 +84,7 @@
 							</li>
 							<li>
 								<div class="a-oauth">
-								 <a href="${pageContext.request.contextPath}/JSP/repassword.jsp"><font color="red">找回密码</font></a>
+								 <a href="${pageContext.request.contextPath}/login/retrieve"><font color="red">找回密码</font></a>
 								</div>
 							</li>
 						</ul>

@@ -10,15 +10,14 @@
 	<link href="${pageContext.request.contextPath}/CSS/jqzoom.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/CSS/product-add.css" rel="stylesheet" type="text/css" />
 	<!--  <link href="${pageContext.request.contextPath}/CSS/style2.css" rel="stylesheet" type="text/css"  />-->
-	<link href="${pageContext.request.contextPath}/CSS/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/CSS/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/CSS/jquery-ui.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/CSS/summernote.css" rel="stylesheet">    
-	<link href="${pageContext.request.contextPath}/CSS/other/spinner.css" rel="stylesheet">
-	
+	<link href="${pageContext.request.contextPath}/CSS/other/spinner.css" rel="stylesheet">	
 	
 	<script src="${pageContext.request.contextPath}/JS/jquery-3.4.1.js" type="text/javascript"></script>		
 	<script src="${pageContext.request.contextPath}/JS/jquery-ui.js" type="text/javascript"></script>	
-	<script src="${pageContext.request.contextPath}/JS/1.js"  type="text/javascript"></script>
+
 	<script src="${pageContext.request.contextPath}/JS/jquery.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/JS/fileinput.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>

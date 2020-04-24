@@ -25,6 +25,7 @@ import com.liu.graduation.dao.AttrDao;
 import com.liu.graduation.dao.ProductDao;
 import com.liu.graduation.dao.RemarkDao;
 import com.liu.graduation.entities.AttrBeen;
+import com.liu.graduation.entities.FindFrom;
 import com.liu.graduation.entities.Product;
 import com.liu.graduation.entities.support.Pagination;
 import com.liu.graduation.entities.support.PaginationUtils;
@@ -46,8 +47,8 @@ public class ProductServiceimpl implements ProductService{
 	@Override
 	public boolean addproduct(Product product)  {
 		
-		Product p= productDao.selectProductById(product.getId());
-		if(p!=null)
+		int p= productDao.checkProductById(product.getId());
+		if(p!=0)
 		{
 			logger.debug("添加商品的商品编号已经存在");
 			return false;
@@ -268,6 +269,29 @@ public class ProductServiceimpl implements ProductService{
 		model.addAttribute("sales", productDao.queryProductBySales(10));
 		model.addAttribute("remarks", remarkDao.queryRemarkById(id));
 		model.addAttribute("product", productDao.selectProductById(id));
+	}
+	@Override
+	public Map<String, Object> findproductBykey(FindFrom findFrom) {
+		Map<String, Object>  map=new HashMap<String, Object>();
+		int recordCount = productDao.countProductByFrom(findFrom);
+        int disp = Integer.parseInt(getPageConf().getProperty("num")) ;
+        int offset = (findFrom.getPage() - 1) * disp;
+        System.out.println(recordCount+"\t"+ recordCount%disp);
+		List<Product> products=productDao.queryProductByFrom(findFrom,new RowBounds(offset, disp));
+		List<Pagination> pages = PaginationUtils.pagination(recordCount,findFrom.getPage(), disp);
+		
+		map.put("curPage", findFrom.getPage());
+		map.put("products", products);
+		map.put("pages", pages);
+		map.put("from", findFrom);
+		map.put("pageCnt", recordCount%disp>0?(recordCount/disp)+1:recordCount/disp);
+		return map;
+		
+	}
+	@Override
+	public List<Product> queryProductBySales(int num) {
+		// TODO Auto-generated method stub
+		return productDao.queryProductBySales(num);
 	}
 	
 

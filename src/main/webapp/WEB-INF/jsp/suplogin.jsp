@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>管理员登录</title>
 	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/gm/gm.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/gm/common.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/JS/gm/gm.js"></script>
 	
@@ -36,9 +36,9 @@
 			  	</div>
 		  	<br>
 				<div class="form-group" style="width: 80%;margin: 0 auto;">
-				   <label for="firstname" class="col-sm-2 " style="line-height: 40px;margin-right: -25px">密码</label>
+				   <label for="firstpassword" class="col-sm-2 " style="line-height: 40px;margin-right: -25px">密码</label>
 				   <div class="col-sm-10">
-				     <input type="password"  name="password" class="form-control" id="firstname" placeholder="请输入密码">
+				     <input type="password"  name="password" class="form-control" id="firstpassword" placeholder="请输入密码">
 				   </div>
 				</div>
 				

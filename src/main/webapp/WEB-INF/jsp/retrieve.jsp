@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BTS网 | 会员中心 &gt; 会员注册</title>
+<title>BTS网 | 会员中心 &gt; 找回密码</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -35,7 +35,7 @@
 						<div class="fqrcode">
 							<p class="note">回复“礼物”有惊喜！" 活动多多，在BTS遇见幸福</p>
 							<p class="img"><img src="${pageContext.request.contextPath}/img/wx.jpg" width="128" height="130" /></p>
-							<p class="gzh">微信号</p>
+							
 						</div>
 					</div>
 				</a>
@@ -63,7 +63,7 @@
 					<div class="box-bar">
 						<ul class="clearfix">
 							<li><a href="${pageContext.request.contextPath}/login/user_login" >登录</a></li>
-							<li class="active"><a href="javascript:;">注册</a></li>
+							<li class="active"><a href="javascript:;">找回密码</a></li>
 						</ul>
 					</div>
 					<div class="loginfrm mt30 regfrm">
@@ -144,7 +144,7 @@ function successfun(data, status) {
     //这里data.success是因为我后天返回的json数据的一个属性 String jsonText = "{'success':'提交成功'}";
     if(data==true)
     	{
-    	showInfo("注册成功",function() {
+    	showInfo("找回成功，跳转到主页",function() {
     		window.location.href="${pageContext.request.contextPath}/";
 		},3)
     	

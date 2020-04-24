@@ -3,10 +3,12 @@ package com.liu.graduation.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.liu.graduation.entities.AttrBeen;
+import com.liu.graduation.entities.FindFrom;
 import com.liu.graduation.entities.Product;
 
 
@@ -22,5 +24,7 @@ public interface ProductService {
 	public Map<String,Object> findProductList(String find,int currpage);
 	public void home(Model model);
 	public void productinfo(String id,Model model) ;
+	public List<Product> queryProductBySales(int num);
+	public Map<String, Object> findproductBykey(FindFrom findFrom);
 	
 }

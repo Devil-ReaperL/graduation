@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.liu.graduation.entities.FindFrom;
 import com.liu.graduation.entities.Product;
 import com.liu.graduation.service.ProductService;
 
@@ -64,7 +65,7 @@ public class ProductController {
 			model.addAttribute("attrs", productService.findAttrList());
 			model.addAttribute("product", productService.findProductByid(id));
 			
-			return "Product/updateProduct";
+			return "product/updateProduct";
 	}
 	
 	
@@ -109,5 +110,20 @@ public class ProductController {
 	{
 		productService.productinfo(id, model);
 		return "productinfo";
+	}
+	@RequestMapping("/search")
+	public String searchproduct (FindFrom findFrom,Model model)
+	{
+		System.out.println(findFrom);
+		model.addAllAttributes(productService.findproductBykey(findFrom));
+		model.addAttribute("sales", productService.queryProductBySales(10));
+		return "search";
+	}
+	@ResponseBody
+	@RequestMapping("/search/ajax")
+	public Map<String, Object> search(FindFrom findFrom,Model model)
+	{
+		System.out.println(findFrom);
+		return productService.findproductBykey(findFrom);
 	}
 }
