@@ -33,7 +33,8 @@ public class Remark {
 		this.remark_id = remark_id;
 	}
 	public String getPhonenum() {
-		return phonenum;
+		
+		return phonenum.substring(0, phonenum.length()/3)+"****"+phonenum.substring(2*phonenum.length()/3, phonenum.length());
 	}
 	public void setPhonenum(String phonenum) {
 		this.phonenum = phonenum;

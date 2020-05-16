@@ -31,7 +31,7 @@
 						   href="#collapseOne" style="height:100%">
 							<i class="icon km02"></i>订单信息<i class="icon km"></i>
 						</a>
-						<dt>
+						</dt>
 					</dl>
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse in">
@@ -49,7 +49,7 @@
 						   href="#collapseTwo" style="height:100%">
 							<i class="icon km02"></i>订单信息<i class="icon km"></i>
 						</a>
-						<dt>
+						</dt>
 					</dl>
 				</div>
 				<div id="collapseTwo" class="panel-collapse collapse ">
@@ -64,7 +64,7 @@
 				<div class="panel-heading">
 						
 				<dl>
-					<dt><a res="1023" href="#" onclick="outUser()"><i class="icon km06"></i><span class="red">注销</span></a></dt>
+					<dt><a res="1023" href="javascript:;" onclick="outUser()"><i class="icon km06"></i><span class="red">注销</span></a></dt>
 				</dl>
 				</div>
 			</div>
@@ -172,7 +172,7 @@
 				
 			</c:forEach>	
 			</div>
-		</div>
+		</div></div>
 		<div class="clear"></div>
 	</div>
 	<jsp:include page="/WEB-INF/jsp/foot.jsp" flush="true" ></jsp:include>

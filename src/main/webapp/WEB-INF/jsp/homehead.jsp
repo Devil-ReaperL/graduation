@@ -97,18 +97,23 @@
 </div>
 <script type="text/javascript">
 function outUser() {
-	$.ajax({
-		 type: "POST",
-       url: "${pageContext.request.contextPath}/common/exit",
-       success: function(data){
-      		if(data)
-      			location.reload()
-       },
-       error: function(XMLHttpRequest,textStatus){
-      	 alert("请求失败"+textStatus)
+	showConfirm( '确信要 注销 吗？', function(){
+		$.ajax({
+			 type: "GET",
+	       url: "${pageContext.request.contextPath}/common/exit",
+	       success: function(data){
+	      		if(data)
+	      			history.pushState("", "", "${pageContext.request.contextPath}/login/index");
+	      			window.location.replace('${pageContext.request.contextPath}/login/index')
+	       },
+	       error: function(XMLHttpRequest,textStatus){
+	      	 alert("请求失败"+textStatus)
 
-       }
-	 })}
+	       }
+		 })
+	});
+	
+}
 </script>
 	
 </body>

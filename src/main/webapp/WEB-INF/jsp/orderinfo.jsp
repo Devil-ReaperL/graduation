@@ -36,7 +36,7 @@
 					<div class="panel-body">
 						<a  class="active" href="javascript:;" onclick="allOrder('${user.phonenum}','${pageContext.request.contextPath}/shop/findorder')">全部订单</a>
 						<a  href="javascript:;" onclick="waitPayment('${user.phonenum}','${pageContext.request.contextPath}/shop/findorder')">&nbsp待付款</a>
-						<a  href="javascript:;" onclick="waitRemark('${user.phonenum}','${pageContext.request.contextPath}/shop/findorder')">&nbsp待评价</a>
+						<a  href="javascript:;" onclick="waitRemark('${user.phonenum}','${pageContext.request.contextPath}/shop/remarkinfo')">&nbsp待评价</a>
 					</div>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 				<div class="panel-heading">
 						
 				<dl>
-					<dt><a res="1023" href="#" onclick="outUser()"><i class="icon km06"></i><span class="red">注销</span></a></dt>
+					<dt><a res="1023" href="javascript:;" onclick="outUser()"><i class="icon km06"></i><span class="red">注销</span></a></dt>
 				</dl>
 				</div>
 			</div>
@@ -82,12 +82,12 @@
 						<dd>
 							<label>状态：</label>	
 									<c:if test="${empty  order.status}">												
-									<a href="/shop/order/payment/order/216165/" class="block">立即支付</a>
-									<a href="/shop/order/cancel/id/216165/" res="confirm">取消订单</a>
-									</c:if>	
+									<a href="${pageContext.request.contextPath}/shop/payment/${order.id}" class="block">立即支付</a>
+									<a href="${pageContext.request.contextPath}/shop/order/cancel/${order.id}" res="confirm">取消订单</a>
+									</c:if>	<!-- 
 									<c:if test="${not empty  order.status}">
-									<a href="/shop/order/cancel/id/216165/" res="confirm">删除订单</a>
-									</c:if>
+									<a href="${pageContext.request.contextPath}/shop/order/cancel/${order.id}" res="confirm">删除订单</a>
+									</c:if> -->
 									<span style="color:red;">									
 										<c:if test="${empty  order.status}">待支付</c:if>
 										<c:if test="${order.status ==10}">等待发货</c:if>

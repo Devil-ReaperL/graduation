@@ -17,7 +17,7 @@
 	<jsp:include page="/WEB-INF/jsp/product/headadmin.jsp" flush="true" ></jsp:include>
 	<link href="${pageContext.request.contextPath}/CSS/bootstrap.css" rel="stylesheet">
     <div class="container kv-main" style="width:100%;text-align:center">
-        <h1>添加商品</h1>
+        <h1>更新商品</h1>
     </div>
    <hr>
 	</div>

@@ -15,7 +15,7 @@
 
 <jsp:include page="/WEB-INF/jsp/head.jsp" flush="true" ></jsp:include>
 
-<div class="wrap">
+<div class="wrap" style="min-height: 300px">
 
 	<c:if test="${not empty carts}">
 	
@@ -47,6 +47,7 @@
 				</div>
 				<div class="cart-shop-num clearfix">
 					<a href="javascript:;">-</a><input type="text" name="goods_num" value="${cart.num}" readonly="true" data-max=${cart.stock} data-uid="${user.phonenum}" data-pid="${cart.product_id}"  data-price="${cart.price}"/><a href="javascript:;">+</a>
+					
 				</div>
 				<div class="cart-shop-active" style="text-align: center;"><span>
 					<a href="javascript:;" data-url="${pageContext.request.contextPath}/user/cartdelete/${user.phonenum}/${cart.product_id}" res="ajax">删除</a><br />			
@@ -82,7 +83,7 @@
 	</div>
 	
     <div class="h60"></div>
-
+<jsp:include page="/WEB-INF/jsp/foot.jsp" flush="true" ></jsp:include>
 <script>
 $(document).ready(function() {
 	$("input[type=checkbox][name=chkall]").click(function(){

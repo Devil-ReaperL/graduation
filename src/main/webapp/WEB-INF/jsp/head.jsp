@@ -89,7 +89,7 @@
                 <dd><a href="${pageContext.request.contextPath}/product/search?attr=纯爱" >爱情鲜花</a></dd>
                 <dd><a href="${pageContext.request.contextPath}/product/search?attr=永生花" >永生花</a></dd>
                 <dd><a href="${pageContext.request.contextPath}/product/search?attr=长辈" >问候长辈</a></dd>
-                <dd><a href="${pageContext.request.contextPath}/product/search?attr=礼盒" >礼盒鲜花</a></dd>
+                <dd><a href="${pageContext.request.contextPath}/product/search?attr=盒" >礼盒鲜花</a></dd>
                 <dd><a href="${pageContext.request.contextPath}/product/search?attr=商务" >商务鲜花</a></dd>
 
 
@@ -99,19 +99,22 @@
 </div>
 <script type="text/javascript">
 function outUser() {
-	$.ajax({
-		 type: "GET",
-       url: "${pageContext.request.contextPath}/common/exit",
-       success: function(data){
-      		if(data)
-      			history.pushState("", "", "${pageContext.request.contextPath}/login/index");
-      			window.location.replace('${pageContext.request.contextPath}/login/index')
-       },
-       error: function(XMLHttpRequest,textStatus){
-      	 alert("请求失败"+textStatus)
+	showConfirm( '确信要 注销 吗？', function(){
+		$.ajax({
+			 type: "GET",
+	       url: "${pageContext.request.contextPath}/common/exit",
+	       success: function(data){
+	      		if(data)
+	      			history.pushState("", "", "${pageContext.request.contextPath}/login/index");
+	      			window.location.replace('${pageContext.request.contextPath}/login/index')
+	       },
+	       error: function(XMLHttpRequest,textStatus){
+	      	 alert("请求失败"+textStatus)
 
-       }
-	 })
+	       }
+		 })
+	});
+	
 }
 </script>
 

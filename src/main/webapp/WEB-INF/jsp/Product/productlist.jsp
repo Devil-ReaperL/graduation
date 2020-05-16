@@ -116,7 +116,7 @@
 </body>
 <script type="text/javascript">
 function deleteProdect(id,name) {
-	if(confirm("确认删除商品+"+name+"吗"))
+	if(confirm("确认删除商品   "+name+" 吗"))
 		{
 		 $.ajax({
 			 type: "GET",
@@ -175,7 +175,7 @@ function successinfo(data) {
 			"<td>"+data.products[k].addtime+'</td>'+
 			"<td>"+
 				'<a href="${pageContext.request.contextPath}/product/update/'+data.products[k].id+'">修改</a><br><br>'+
-				'<a onclick="deleteProdect('+data.products[k].id+','+data.products[k].name+')">删除</a>'+
+				'<a onclick="deleteProdect('+data.products[k].id+',\''+data.products[k].name+'\')">删除</a>'+
 			"</td>"+
 		"</tr>"
 		}

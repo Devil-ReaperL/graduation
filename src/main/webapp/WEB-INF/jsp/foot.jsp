@@ -120,7 +120,7 @@
 			</a>
 		</li>
 		<li class="rside-btn rotate">
-			<a href="${pageContext.request.contextPath}/product/search?attr=礼盒" title="生日送花">
+			<a href="${pageContext.request.contextPath}/product/search?attr=盒" title="生日送花">
 				<i class="icon-rside icon-birth"></i>
 				<span>生日送花</span>
 			</a>

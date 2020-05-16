@@ -70,7 +70,7 @@
                 </c:forEach>
                 <div class="left ib202">
                     <ul>
-                          <c:forEach items="${aa.value}" var="aaa">
+                          <c:forEach items="${aa.value}" var="aaa" begin="0" end="5">
                                 <li>
                                     <a class="info imghover" href="${pageContext.request.contextPath}/product/info/${aaa.id}">
                                   

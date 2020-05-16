@@ -21,7 +21,7 @@ $(function(){
 		}).eq(0).addClass('active');
 	}
 
-	app.login.ajax = function(){ 
+	/*app.login.ajax = function(){ 
 		showWindow('您尚未登录', 'https://www.haohua.com/member/login/index', 500, 300);
 	}
 
@@ -44,7 +44,7 @@ $(function(){
 		$('.cart span').html( result.data.num );
 		$('.cart2 span').html( '(' + result.data.num + ')' );
 	});
-
+*/
 	//筛选
 	if( $('.filter-but')[0] ){
 		$('.filter-but a').click(function(){

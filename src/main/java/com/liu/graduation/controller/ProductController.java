@@ -31,7 +31,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping("/addproduct")
-	public String addfile(@Valid Product product,Model model) throws IOException
+	public String addfile( Product product,Model model) throws IOException
 	{
 		
 		if(productService.addproduct(product))

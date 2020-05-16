@@ -179,6 +179,8 @@ function PageAjax(url) {
 	var attr=$("#attr").val()
 	var sort=$("#sort").val()
 	var order=$("#order").val()
+	if(url==null || url=='')
+		return false
 	$.ajax({
 		 type: "GET",
         url: "${pageContext.request.contextPath}/product/search/ajax",

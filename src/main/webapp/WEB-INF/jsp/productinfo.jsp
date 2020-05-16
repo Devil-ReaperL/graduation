@@ -183,10 +183,11 @@
      		 	</div>
 			
 				<div class="tab-pane fade" id="reward">
-				<div class="h60"></div>
+				
 				
 				<div class="body-box yhpj">
 				<c:if test="${product.remark_count==0}">
+				<div class="h60"></div>
 					<div style=" width: 100%;text-align: center;">
 					<label>暂无评价</label>
 					</div>
@@ -225,7 +226,7 @@
 						<li class="bbs-list-item">
 							<div class="bbs-con">
 								<div class="bbs-user clearfix">
-									<span class="bbs-user-name">135****2310 </span>
+									<span class="bbs-user-name">${remark.phonenum}</span>
 									<span class="star"><span class="star-score star-${remark.rank}"></span></span>
 								</div>
 								<div class="bbs-body">
@@ -258,76 +259,6 @@
 			</div>
 			
 			</div></div></div></div>
-		<!--  
-<div class="wrap">
-    <div class="h60"></div>
-    <div class="body-box yhpj">
-        <div class="body-box-bar"><span class="title">用户评价(840)</span></div>
-
-        <div class="body-haoping">
-
-            <div class="left">
-                <p>好评率</p>
-                <div class="haoping-score">${percent}</div>
-
-                <span class="star"><span class="star-score star-${percent1}"></span></span>
-            </div>
-            <div class="right">
-                <dl class="clearfix">
-                    <dt>大家都在说：</dt>
-
-                    <dd>送货速度<span>(84)</span></dd>
-                    <dd>花质量不错<span>(92)</span></dd>
-                    <dd>包装很好<span>(92)</span></dd>
-                    <dd>送花速度快<span>(92)</span></dd>
-                    <dd>性价比高<span>(92)</span></dd>
-                    <dd>值得推荐<span>(84)</span></dd>
-                    <dd>花很漂亮<span>(84)</span></dd>
-                    <dd>服务态度好<span>(128)</span></dd>
-                </dl>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-        <div class="bbs-ajax">
-
-            <div class="bbs-list">
-                <ul>
-                    <c:forEach items="${remarks}" var="remark">
-                    <li class="bbs-list-item">
-                        <div class="bbs-user-photo"></div><div class="bbs-user-photo"></div>
-                        <div class="bbs-con">
-                            <div class="bbs-user clearfix">
-                                <span class="bbs-user-name">${remark.phonenum}</span>
-                                <span class="star"><span class="star-score star-${remark.rank}"></span></span>
-                            </div>
-                            <div class="bbs-body">
-                                <p>${remark.text}</p>
-                            </div>
-
-                            <div class="bbs-img">
-                                <ul class="clearfix">
-                                    <c:if test="${remark.remark_src ne null}">
-                                    <li><img src="${remark.remark_src}" jqimg="#" width="200" /></li>
-                                    </c:if>
-                                </ul>
-                                <div class="bbs-img-preivew"></div>
-                            </div>
-                            <div class="bbs-post">
-                                <span class="bbs-post-date">${remark.time}</span>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-
-                    </c:forEach>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <jsp:include page="/WEB-INF/jsp/foot.jsp" flush="true" ></jsp:include>
 </body>
 <script type="text/javascript">

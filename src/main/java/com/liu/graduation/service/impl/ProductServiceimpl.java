@@ -58,8 +58,10 @@ public class ProductServiceimpl implements ProductService{
 		String path = findServerPath();
 		String f=UUID.randomUUID().toString()+"\\";
 		try {
+			System.out.println(product.getFiles().length);
 			if( product.getFiles().length>0)
-			for (MultipartFile multipartFile : product.getFiles()) {			
+			for (MultipartFile multipartFile : product.getFiles()) {	
+				System.out.println(multipartFile.getName());
 				String s=saveImgfile(multipartFile, path+f);
 				if(s!="")
 				{
