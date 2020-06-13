@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>好花网 | 购物中心 &gt; 订单管理</title>
+    <title> 购物中心 &gt; 订单管理</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
 	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
@@ -47,7 +47,7 @@
 						<dl ><dt>
 						<a data-toggle="collapse" data-parent="#accordion" 
 						   href="#collapseTwo" style="height:100%">
-							<i class="icon km02"></i>订单信息<i class="icon km"></i>
+							<i class="icon km02"></i>用户信息<i class="icon km"></i>
 						</a>
 						</dt>
 					</dl>

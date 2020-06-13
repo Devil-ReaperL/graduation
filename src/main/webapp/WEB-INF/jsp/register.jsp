@@ -193,7 +193,6 @@ $("#verification").click(function() {
 
 
 function disable(num,btn) {
-	
 	if(num<1){
 		$(btn).attr("disabled", false)
 		$(btn).text("重新发送验证")
@@ -203,8 +202,7 @@ function disable(num,btn) {
 		setTimeout(function() {
 			disable(num-1,btn)
 		} , 1000)
-	}
-		
+	}		
 }
 </script>
 </body>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>好花网 | 购物中心 &gt; 购物车</title>
+    <title> 购物中心 &gt; 购物车</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/base.css" />
 

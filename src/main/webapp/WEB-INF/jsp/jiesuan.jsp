@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>好花网 | 购物中心 &gt; 购物车</title>
+    <title> 购物中心 &gt;结算</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

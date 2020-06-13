@@ -33,7 +33,7 @@ public class CommonController {
 	@RequestMapping("/exit")
 	public String exit(HttpServletRequest request)
 	{
-		HttpSession  session=request.getSession();
+		HttpSession session=request.getSession();
 		session.removeAttribute("user");
 		return "true";
 	}

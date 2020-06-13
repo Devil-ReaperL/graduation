@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>鲜花速递网站-好花网!网上订鲜花,百株好花只取一朵精华</title>
+    <title>鲜花速递网站!网上订鲜花,百株好花只取一朵精华</title>
     <meta name="keywords" content="鲜花，鲜花网，鲜花速递，网上订花，好花网" />
     <meta name="description" content="好花网, 百株好花只取一朵精华！好花网深知每一张订单都蕴含重大的意义，视口碑为生命，多年来专注鲜花速递行业，以感恩心态服务每一位客户。好花网赋予鲜花以文化、艺术的魅力，不断推出有故事的创新花束；好花网已经设计出超100多款花束，我们会持续引领花艺潮流，确保产品品质稳定如一！" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
